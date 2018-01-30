@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Make site responsive on mobile/tablet -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title><%= title %></title>
+ 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">  
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="stylesheet" href="https://unpkg.com/smartphoto@1.1.0/css/smartphoto.min.css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">              
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,800" rel="stylesheet">        
+ 
+    </head>
+    <body>
+
+
+    <script
+          src="https://code.jquery.com/jquery-3.1.1.min.js"
+          integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+          crossorigin="anonymous">
+    </script> 
+
+    
+    
+<!-- A VRIFIER SI UTYILISIE -->    
+<script src="https://unpkg.com/smartphoto@1.1.0/js/smartphoto.min.js"></script>
+
+
+
+
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+    
+                <a class="navbar-brand" href="/"><%= title %></a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="<%= typeof page !== 'undefined' && page === 'articles' ? 'active' : '' %>"><a href="/articles">Home</a></li>
+                </ul>
+                    <form action="/articles" method="GET" class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" name="search" placeholder="Search pattern" class="form-control">
+                            <input type="submit" value="Search" class="btn btn-default">
+                        </div>
+                    </form>
+                <!--<ul class="nav navbar-nav ">-->
+                <!--    <li>-->
+                <!--        <a href="#">About Us</a>-->
+                <!--    </li>-->
+                <!--    <li>-->
+                <!--        <a href="#">Contact Us</a>-->
+                <!--    </li>                    -->
+                <!--    <li>-->
+                <!--        <a href="#">FAQ</a>-->
+                <!--    </li>-->
+                <!--    <li>-->
+                <!--        <button type="button" class="btn btn-default navbar-btn">J'achète</button>-->
+                <!--    </li>-->
+                <!--    <li>-->
+                <!--        <button type="button" class="btn btn-default navbar-btn">Je vends</button>-->
+                <!--    </li>-->
+                    
+                <!--</ul>-->
+                  <ul class="nav navbar-nav navbar-right">
+                  <li>
+                      <a href="/cart"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i> Shopping Cart <span class="badge"><%= session.cart.totalQty %></span></a>
+                  </li>
+                  <% if(!currentUser){ %>
+                      <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>
+                      <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register">Sign Up</a></li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Contact us</a></li>
+                            <li><a href="#">About us</a></li>
+                          </ul>
+                        </li> 
+                  <% } else { %>
+                      <li><a href="#">Signed In As <%= currentUser.username %></a></li>
+                      <li><a href="/logout">Logout</a></li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="/users/<%= currentUser.id %>">Preferences</a></li>
+                            <li><a href="/users/<%= currentUser.id %>/edit">Edit Profile</a></li>
+                            <% if (currentUser.isVendor) { %>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/users/<%= currentUser.id %>">Manage Your Boutique</a></li>
+                            <% }; %>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Contact us</a></li>
+                            <li><a href="#">About us</a></li>
+                            
+                          </ul>
+                        </li>                      
+                  <% } %>
+              </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+    </div>
+
+
+    <div class="container-fluid">
+

@@ -1,0 +1,182 @@
+<% include ../partials/header %>
+  <div class="container">
+      <div class="row">
+      		        <div class="alert alert-info alert-dismissable">
+	          <a class="panel-close close" data-dismiss="alert">×</a> 
+	          <i class="fa fa-coffee"></i>
+	          This is an <strong>.alert</strong>. Use this to show important messages to the user.
+	        </div>
+      	<form class="form-horizontal" role="form" action="/users/<%= user._id %>?_method=PUT" method="POST">
+      	  <!-- left column -->
+	      <div class="col-md-5">
+	        <div class="text-center">
+	        	<h1><%= user.username %></h1>  
+	        	<hr>
+	        </div>
+	        <div class="text-center">
+	        	<img src="<%= user.avatar %>" id="img-avatar" name="avatar" class="avatar img-circle" width="96px" height="96px" alt="avatar">
+	        	<h6>Changer d'avatar...</h6>
+	            <div id="userActions" >
+	            	<p>Drag &amp; Drop Image</p>
+	            	<input class="btn btn-default" type="file" name="avatarLoad" id="fileUpload" />
+	            	<img id="imgPrime" alt="uploaded image placeholder" width="100px" />     
+	            	<input type="hidden" name="avatarSrcName" id="avatarSrcName"/>
+	            	<input type="hidden" name="avatar" id="avatarOldName" value="<%= user.avatar %>"/>
+	            </div>	          
+	        </div>
+	        <div>
+				<p><textarea name="description" cols="40" rows="5"><%= user.description %></textarea></p>	
+	        </div>
+	      </div>
+	      	
+	      <!-- edit form column -->
+	      <div class="col-md-7 personal-info">
+
+	        <h3>Personal info</h3>
+	        
+	        
+	          <!--<div class="form-group">-->
+	          <!--  <label class="col-lg-3 control-label">Pseudo :</label>-->
+	          <!--  <div class="col-lg-8">-->
+	          <!--  	<input class="form-control signup" type="text" name="username" placeholder="Username" value="<%= user.username %>" />-->
+	          <!--  </div>-->
+	          <!--</div>-->
+	          <div class="form-group">
+	            <label class="col-lg-3 control-label">Email :</label>
+	            <div class="col-lg-8">
+	            	<input class="form-control signup" type="text" name="email" placeholder="E-mail" value="<%= user.email %>"/>
+	            </div>
+	          </div>
+	          <div class="form-group">
+	            <label class="col-md-3 control-label">Password :</label>
+	            <div class="col-md-8">
+		         	<input class="form-control signup" id="password" type="password" name="password" placeholder="Password" value="<%= user.password %>" />
+	            </div>
+	          </div>
+	          <div class="form-group">
+	            <label class="col-md-3 control-label">Confirm password :</label>
+	            <div class="col-md-8">
+		            <input class="form-control signup" id="cpassword" type="password" name="password2" placeholder="Retype password" />              
+	            </div>
+	          </div>
+	          <div class="form-group">
+	            <label class="col-md-3 control-label"></label>
+	            <div class="col-md-8">
+	              <input type="submit" id="btnSubmit" class="btn btn-primary" value="Confirmer">
+	              <span></span>
+	              <input type="reset" class="btn btn-default" value="Cancel">
+	            </div>
+	          </div>
+
+	      </div> 
+	     </form>
+      </div>
+      
+    
+  </div>
+  
+  
+
+  <script>
+
+'use strict';
+	     $('#heading-banner').css('display', 'none');
+	     
+/**
+// ||||||||||||||||||||||||||||||| \\
+//	Global Object $: Generic controls
+// ||||||||||||||||||||||||||||||| \\
+**/
+(function($){
+	// http://stackoverflow.com/questions/4083351/what-does-jquery-fn-mean
+	var $ = function( elem ){
+		if (!(this instanceof $)){
+      return new $(elem);
+		}
+		this.el = document.getElementById( elem );
+	};
+	window.$ = $;
+	
+	$.prototype = {
+		onChange : function( callback ){
+			this.el.addEventListener('change', callback );
+			return this;
+		}
+	};
+
+})(jQuery);
+
+
+/**
+// ||||||||||||||||||||||||||||||| \\
+//	Drag and Drop code for Upload
+// ||||||||||||||||||||||||||||||| \\
+**/
+var dragdrop = {
+	init : function( elem ){
+		elem.setAttribute('ondrop', 'dragdrop.drop(event)');
+		elem.setAttribute('ondragover', 'dragdrop.drag(event)' );
+	},
+	drop : function(e){
+		e.preventDefault();
+		var file = e.dataTransfer.files[0];
+		runUpload( file );
+	},
+	drag : function(e){
+		e.preventDefault();
+	}
+};
+
+/**
+// ||||||||||||||||||||||||||||||| \\
+//	Code to capture a file (image) 
+//  and upload it to the browser
+// ||||||||||||||||||||||||||||||| \\
+**/
+function runUpload( file ) {
+	// http://stackoverflow.com/questions/12570834/how-to-preview-image-get-file-size-image-height-and-width-before-upload
+	if( file.type === 'image/png'  || 
+			file.type === 'image/jpg'  || 
+		  file.type === 'image/jpeg' ||
+			file.type === 'image/gif'  ||
+			file.type === 'image/bmp'  ){
+		var reader = new FileReader(),
+				image = new Image();
+		reader.readAsDataURL( file );
+		reader.onload = function( _file ){
+			$('imgPrime').el.src = _file.target.result;
+			$('img-avatar').el.src = _file.target.result;
+			$('imgPrime').el.style.display = 'inline';
+			$('avatarSrcName').el.value = $('imgPrime').el.src;
+			
+		} // END reader.onload()
+	} // END test if file.type === image
+}
+
+/**
+// ||||||||||||||||||||||||||||||| \\
+//	window.onload fun
+// ||||||||||||||||||||||||||||||| \\
+**/
+window.onload = function(){
+	
+
+	if( window.FileReader ){
+		// Connect the DIV surrounding the file upload to HTML5 drag and drop calls
+		dragdrop.init( $('userActions').el );
+		//	Bind the input[type="file"] to the function runUpload()
+		$('fileUpload').onChange(function(){ runUpload( this.files[0] ); });
+	}else{
+		// Report error message if FileReader is unavilable
+		var p   = document.createElement( 'p' ),
+				msg = document.createTextNode( 'Sorry, your browser does not support FileReader.' );
+		p.className = 'error';
+		p.appendChild( msg );
+		$('userActions').el.innerHTML = '';
+		$('userActions').el.appendChild( p );
+	}
+};        
+
+    </script>
+    
+<% include ../partials/footer %>

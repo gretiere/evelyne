@@ -1,0 +1,141 @@
+<% include ../partials/header %> 
+
+
+    <script>
+        $('#heading-banner').css('display', 'none');
+    </script>
+
+
+    <div class="container gallery-container">
+        <% if (currentUser && currentUser.isAdmin) { %>
+        <div class="alert alert-info" role="alert">Bonjour <%= currentUser.firstName %>. Vous êtes administrateur du site.</div>
+        <% };%>
+   
+        <% if (currentUser && currentUser.isVendor) { %>
+        <div class="alert alert-info" role="alert">Bonjour <%= currentUser.firstName %>! Vous êtes vendeuse et vous pouvez mettre en vente de nouveaux articles.</div>
+         <p>
+            <a class="btn btn-primary btn-large" href="/articles/new">Ajouter un article</a>
+         </p>        
+        <% };%>
+        
+        <h1>Toutes les nouveautés</h1>
+        
+        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+
+            <% articles.forEach(function(article){ %>
+                <section class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                    <div class="card">
+                        <a class=" js-img-viwer" href="<%= article.image %>" >
+                            <div class="crop-to-square">
+                                <div class="crop-to-square-positioner img-text-overlay">
+                                    <img class="crop-to-square-img " src="<%= article.image %>" alt="Park">
+                                </div>
+                            </div>
+                        </a>   
+                        <div class="card-block">
+                            <h4 class="card-title mt-3"><a href="/articles/<%= article._id %>"><%= article.name %></a></h4>
+                            <div class="meta">
+                                <a><%= article.author.username %></a>
+                            </div>
+                            <div class="card-text">
+                                <p><%= article.description %></p>
+                            </div>
+                            <div class="product-price">
+                                <%= article.cost %>€
+                            </div>
+                            <div><small>Last updated 3 mins ago</small></div>
+                        </div>
+                        <div class="card-footer">
+                            
+                            <% if (currentUser && currentUser.isVendor && article.author.username===currentUser.username) { %>
+                                <button class="btn btn-secondary float-right btn-sm">
+                                    <a href="/articles/<%= article._id %>">Editer</a>
+                                </button>
+                            <% } else { %>       
+                                <button class="btn btn-secondary float-right btn-sm">
+                                    <a href="/add-to-cart/<%= article._id %>">Acheter</a>
+                                </button>                            
+                            <% }; %>
+
+                        </div>                            
+                    </div>
+                </section>            
+            <% }); %>
+            <!-- pagination -->
+            <div class="col-md-12">
+              <ul class="pagination"></ul>
+            </div>
+        </div>
+    </div>
+
+
+     <!-- pagination -->
+    <script>
+      (function($) {
+          
+         // all content number 
+        var totalContent = $("section").length;
+          // post number in a page
+        var onePageContent = 4;
+          
+          //Page number and Math.round for balancing page
+          $("section:gt(" + (onePageContent - 1) + ")").hide();
+          // correction bug arrondi : remplacer round par ceil
+          var totalPage = Math.ceil(totalContent / onePageContent);
+          // create page link
+          for(i= 1; i <= totalPage; i++) {    
+            $(".pagination").append("<li><a href='javascript:void(0)'>" + i + "</a></li>");
+          }
+          
+          // first page added active class
+          $(".pagination li:first").addClass("active");
+          
+          // click function
+          $(".pagination li").on("click", function() {
+            
+              
+              var index = $(this).index() + 1;
+              var gt = onePageContent * index;
+            
+              $(".pagination li").removeClass("active");
+              $(this).addClass("active");    
+              $("section").hide();
+            
+              for(i = gt - onePageContent; i < gt; i++) {      
+                $("section:eq(" + i + ")").show();
+              }
+            
+          });
+      
+     })($);      
+        
+    </script>
+    
+<script> 
+$(document).ready(function() {
+  var imgs = $('.crop-to-square-img'); //jQuery id selector
+  imgs.each(function() {
+    var img = $(this);
+    var width = img.width(); //jQuery width method
+    var height = img.height(); //jQuery height method
+
+    if (width < height) {
+      img.css('max-height', '150%');
+
+    } else {
+      img.css('max-width', '150%');
+      img.css('max-height', 'auto%');
+    }
+  })
+});
+</script> 
+
+    <!-- plugin pour zoomer sur les images-->
+	<script>
+	window.addEventListener('load',function(){
+		new SmartPhoto(".js-img-viwer");
+        new SmartPhoto(".js-img-viwer-fit");
+	});
+	</script>
+
+<% include ../partials/footer %>

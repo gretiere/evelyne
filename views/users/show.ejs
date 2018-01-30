@@ -1,0 +1,31 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h1><%= user.username %></h1>        
+            <div class="thumbnail">
+                  <img src="<%= user.avatar %>" alt="user profile image">          
+                  <div class="caption"><a href="mailto:<%= user.email %>"><%= user.email %></a></div>
+            </div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto odit numquam, reiciendis commodi totam ad reprehenderit et accusantium excepturi. Molestias consequatur mollitia, illo officia cupiditate tenetur id iure corrupti placeat!
+            
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, hic repellendus harum obcaecati quas repudiandae id accusamus quod modi tempore, perspiciatis quibusdam cupiditate earum cumque distinctio labore vero sequi possimus.
+    
+        </div>
+        <% if (user.isVendor){ %>
+        <div class="col-md-8">
+            <h3><%= user.username %>'s articles : </h3>
+            <ul>
+                <% articles.forEach(function(article) { %>
+                    <li><a href="/articles/<%= article.id %>"><%= article.name %></a></li>
+                <% }); %>
+            </ul>
+        </div>
+        <% }; %>
+    </div>
+</div>
+    <script>
+        $('#heading-banner').css('display', 'none');
+    </script>
+    
+<% include ../partials/footer %>

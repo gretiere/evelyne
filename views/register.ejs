@@ -1,0 +1,58 @@
+<% include ./partials/header %> 
+
+<div id="login-box">
+    <form action="/register" method="post">    
+          <div class="left">
+            <h1>Sign up</h1>
+        
+            <input id='radio-1' type="radio" name='isVendor' value="1" checked='checked' />
+            <label for="radio-1">Je vends</label>
+            
+            <input id='radio-2' type="radio" name='isVendor' value="0"/>
+            <label for="radio-2">J'achète</label>
+            
+            <input  class="signup" type="text" name="username" placeholder="Username" />
+            <input class="signup" type="text" name="email" placeholder="E-mail" />
+            <input class="signup" type="password" id="password" name="password" placeholder="Password" />
+            <input class="signup" type="password" id="cpassword" name="password2" placeholder="Retype password" />
+            
+            <input class="signup" type="submit" id="btnSubmit" name="signup_submit" value="Sign me up" />
+          </div>
+          
+          <div class="right">
+            <span class="loginwith">Sign in with<br />social network</span>
+            
+            <button class="social-signin facebook">Log in with facebook</button>
+            <button class="social-signin twitter">Log in with Twitter</button>
+            <button class="social-signin google">Log in with Google+</button>
+          </div>
+          <div class="or">OR</div>
+        </div>
+    </form>
+
+    <script>
+    
+        $('#heading-banner').css('display', 'none');
+        $('body').css('background','#BADA55');        
+        $('body').css('color','#2E8612');        
+
+        $(function () {
+            $("#btnSubmit").click(function () {
+                var password = $("#password").val();
+                var confirmPassword = $("#cpassword").val();
+                if (password != confirmPassword) {
+                    alert("Passwords do not match.");
+                    return false;
+                }
+                return true;
+            });
+        });
+          /*
+        $('#upload_widget_opener').cloudinary_upload_widget(
+            { cloud_name: 'dhc7ovnwk', api_key: '242264815357814', upload_preset: 'yqr0hxm0', 
+              cropping: 'server' },
+        function(error, result) { console.log(error, result) });        
+        */
+    </script>
+</div> 
+<% include ./partials/footer %> 
