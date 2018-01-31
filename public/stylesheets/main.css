@@ -15,6 +15,12 @@ h1, h2 {
     font-weight: 700;
 }
 
+.star {
+    color: #87a7a6;  
+    text-align: center;
+}
+
+
 body {
     margin: 0px;
     padding: 0px;
@@ -213,9 +219,31 @@ button.social-signin.google {
 
 
 #imgPrime{ display: none; }
+.colorblue h1, h2, .star {
+    color: blue;
+}
+
+.produkt {
+    font-family: "Helvetica Neue",Helvetica,"pragmatica-web",Arial,sans-serif;  
+    letter-spacing: -0.04em;
+    font-size: 24px;
+    font-weight: 300;
+}
+.produkt-price{
+    display: inline;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 700;
+}
+.produkt-add{
+    display: inline;
+}
+
+
 
 #section1 {
     display: inline-block;
+    margin-top: 40px;
     /* background-image: linear-gradient(to right, #2C3E50, #4CA1AF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
