@@ -33,31 +33,22 @@
                             </div>
                         </a>   
                         <div class="card-block">
-                            <h4 class="card-title mt-3"><a href="/articles/<%= article._id %>"><%= article.name %></a></h4>
-                            <div class="meta">
-                                <a><%= article.author.username %></a>
+                            <h3 class="card-title mt-3"><a href="/articles/<%= article._id %>"><%= article.nom %></a></h3>
+                            <h4 class="card-subtitle mt-3"><%= article.nomSecondaire %></h4>
+                            <div class="product-price">
+                                <%= article.prix %>€
+                            </div>                            
+                            <div class="card-vendor">
+                                Vendu par <a href="/users/<%= article.author.id %>"><%= article.author.username %></a>
                             </div>
+                            <button class="btn btn-voir-plus float-right">
+                                <a href="/articles/<%= article._id %>">Informations produit</a>
+                            </button>    
                             <div class="card-text">
                                 <p><%= article.description %></p>
                             </div>
-                            <div class="product-price">
-                                <%= article.cost %>€
-                            </div>
-                            <div><small>Last updated 3 mins ago</small></div>
                         </div>
-                        <div class="card-footer">
-                            
-                            <% if (currentUser && currentUser.isVendor && article.author.username===currentUser.username) { %>
-                                <button class="btn btn-secondary float-right btn-sm">
-                                    <a href="/articles/<%= article._id %>">Editer</a>
-                                </button>
-                            <% } else { %>       
-                                <button class="btn btn-secondary float-right btn-sm">
-                                    <a href="/add-to-cart/<%= article._id %>">Acheter</a>
-                                </button>                            
-                            <% }; %>
-
-                        </div>                            
+                      
                     </div>
                 </section>            
             <% }); %>

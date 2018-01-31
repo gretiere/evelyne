@@ -6,9 +6,16 @@ var mongoose = require("mongoose");
 // ...
 var articleSchema = new mongoose.Schema({
    name: String,
+   nom: String,
+   nomSecondaire: String,
    image: String,
+   illustration: String,
    description: String,
+   descriptionTechnique: String,   
+   prix: Number,
    cost: Number,
+   couleurTheme: String,
+   afficheVitrine: Boolean,
    author: {
       id: {
          type: mongoose.Schema.Types.ObjectId,

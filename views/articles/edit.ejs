@@ -5,26 +5,39 @@
         <div style="width: 30%; margin: 25px auto;">
             <form action="/articles/<%= article._id %>?_method=PUT" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="article[name]" value="<%= article.name %>">
+                    <input class="form-control" type="text" name="article[nom]" value="<%= article.nom %>">
                 </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="article[nomSecondaire]" value="<%= article.nomSecondaire %>">
+                </div>                
                 <div class="form-group">
                     <input class="form-control" type="text" name="article[image]" value="<%= article.image %>">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="number" name="article[cost]" value="<%= article.cost %>" step="0.1" min="0" required>
+                    <input class="form-control" type="text" name="article[couleurTheme]"  value="<%= article.couleurTheme %>" placeholder="Couleur d'accompagnement" required>
+                </div>                 
+                <div class="form-group">
+                  <input class="form-control" type="number" name="article[prix]" value="<%= article.prix %>" step="0.1" min="0" required>
                 </div>                
                 <div class="form-group">
                     <input class="form-control" type="text" name="article[description]" value="<%= article.description %>">
                 </div>
                 <div class="form-group">
+                    <input class="form-control" type="text" name="article[descriptionTechnique]" value="<%= article.descriptionTechnique %>">
+                </div>                
+                <div class="form-group">
                     <label for="image">Photos</label>
                     <input type="file" id="photo" name="photo" accept="image/*" multiple>
                 </div>                
                 <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                    <label for="image">Illustration</label>
+                    <input type="file" id="illustration" name="illustration" accept="image/*" multiple>
+                </div>                  
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Valider</button>
                 </div>
             </form>
-            <a href="/articles">Go Back</a>
+            <a href="/articles">Retour à la page d'accueil</a>
         </div>
     </div>
 

@@ -6,9 +6,11 @@
             <p class="lead product-header">Article</p>
         </div>
         <div class="col-md-12" >
-            <p class="lead product-title"><%=article.name%></p>
+            <p class="lead product-title"><%=article.nom%></p>
         </div>
-
+        <div class="col-md-12" >
+            <p class="lead product-title"><%=article.nomSecondaire%></p>
+        </div>
         <div class="row product flexbox">
             <div class="col-md-4 product-grid">
                 <img class="img-responsive product-image" src="<%= article.image %>">
@@ -22,16 +24,16 @@
                 </div>
                 <div class ="row">
                      <div class="col-md-6">
-                        <h4 class="product-item">Prix de vente : &nbsp;<span class="product-price"><%= article.cost %> &euro;</span></h4>
+                        <h4 class="product-item">Prix de vente : &nbsp;<span class="product-price"><%= article.prix %> &euro;</span></h4>
                     </div>  
                 </div>
 
                 <% if((currentUser && article.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)){ %>
                     <div class ="row">
                         <div class="col-md-6">
-                            <a class="btn btn-xs btn-warning" href="/articles/<%= article._id %>/edit">Edit</a>
+                            <a class="btn btn-xs btn-warning" href="/articles/<%= article._id %>/edit">Modifier</a>
                             <form id="delete-form" action="/articles/<%= article._id %>?_method=DELETE" method="POST">
-                                <button class="btn btn-xs btn-danger">Delete</button>
+                                <button class="btn btn-xs btn-danger">Supprimer</button>
                             </form>
                         </div>  
                     </div>                             
@@ -63,19 +65,14 @@
                             <%= article.description %>
                         </p>
                     </div>  
+                     <div class="col-md-12 ">
+                        <h4 class="product-item">Description technique :</h4>
+                        <p>
+                            <%= article.descriptionTechnique %>
+                        </p>
+                    </div>                      
                 </div>  
             </div> 
-            <div class="col-md-4 product-grid product-meta">
-                <strong>DESCRIPTION</strong>
-                <p>Culotte en dentelle et microfibre</p>
-                <p>En dentelle et microfibre</p>
-                <p>Nœud avec bijou devant</p>
-                <p>Fond doublé coton</p>
-                <strong>COMPOSITION</strong>
-                <p>Majorité de fibres synthétiques</p>
-                <p>-toa href="#"><strong>Comment faire</strong></a></p>
-                <strong>Couleurs</strong>
-            </div>
 
         </div>
 

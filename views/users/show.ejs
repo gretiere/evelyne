@@ -17,7 +17,7 @@
             <h3><%= user.username %>'s articles : </h3>
             <ul>
                 <% articles.forEach(function(article) { %>
-                    <li><a href="/articles/<%= article.id %>"><%= article.name %></a></li>
+                    <li><a href="/articles/<%= article.id %>"><%= article.nom %></a></li>
                 <% }); %>
             </ul>
         </div>

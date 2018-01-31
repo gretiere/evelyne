@@ -55,8 +55,13 @@ router.get("/", function(req, res){
     var cart = new Cart(req.session.cart ? req.session.cart : {});
     req.session.cart = cart;
     console.log(req.session);
+    Article.find({}, function(err, allarticles){
+        req.session.save(function(){
+            res.render("landing" , {articles: allarticles} );
+        });
+    });    
     // eval(require("locus"));
-    res.render("landing");
+
 });
 
 

@@ -3,152 +3,42 @@
     <div class="promo-header " id="heading-banner">
 
         <div class="my-container container pt25-sm-down">
-            <section id ="section1" class="colorblue">
-            <h1>Boulenn</h1>
-            <div class="star"><i class="fa fa-star" aria-hidden="true"></i></div>
-            <h2>Boules au crochet</h2>
-            <p>Boulenn est une petite boule de laine qui porte bien son nom ! Un mélange de mérinos, extra-fin cachemire et dralon pour un fil à tricoter d'une douceur incomparable. Chaud, confortable, doux, précieux... Anti-stress... Avec une finition impeccable !</p>
-            <div class="wrapper">
-                <img class="" src="http://cdn3.craftsy.com/blog/wp-content/uploads/2015/09/Crochet-Balls-in-Different-Sizes.jpg"/>
-                <div class="description">
-                    <p class="description-content">
-                        Boulenn 15€
-                    </p>
-                </div>
-            </div>
-            <p>Composition :40% Mérinos ExtraFin - 50% Dralon - 10% Cachemire</p>
-            <div class="produkt">
-                Boulenn   
-                <div class="produkt-price">
-                14,90€
-                </div>
-                <div class="produkt-add">
-                    <button class="btn btn-success float-right">
-                        <a href="/add-to-cart/5a64ea69b6f3da2e197bb1f0">Acheter</a>
-                    </button>
-                </div>                
-            </div>
-            <div class="produkt">
-                Boulenn   
-                <div class="produkt-price">
-                14,90€
-                </div>
-                <div class="produkt-add">
-                    <button class="btn btn-secondary float-right btn-sm">
-                        <a href="/add-to-cart/5a64ea69b6f3da2e197bb1f0">Acheter</a>
-                    </button>
-                </div>                
-            </div>
+            
+            <% articles.forEach(function(article) { %>
+                <section id ="section1">
+                    <h1 style="color:<%= article.couleurTheme %>;"><%= article.nom %></h1>
+                    <!-- <div class="star" style="color:#37474f;"><i class="fa fa-star" aria-hidden="true"></i></div> -->
+                    <h2 style="color:#546e7a;"><%= article.nomSecondaire %></h2>   
+                    <div class="star" style="color:#37474f;"><i class="fa fa-star" aria-hidden="true"></i></div>                     
+                    <p><%= article.description %></p>
+                    <div class="wrapper">
+                        <img class="" src='<%= article.image %>'/>
+                        <div class="description">
+                            <p class="description-content">
+                                <%= article.nom %>&nbsp;<%= article.prix %>&nbsp;&euro;
+                            </p>
+                        </div>
+                    </div> 
+                    <p><%= article.descriptionTechnique %></p>
+                    <div class="produkt">
+                        <%= article.nom %>
+                        <div class="produkt-price">
+                        <%= article.prix %>&nbsp;&euro;
+                        </div>
+                        <div class="produkt-add">
+                            <button class="btn btn-voir-plus float-right">
+                                <a href="/articles/<%= article.id %>">Voir l'article</a>
+                            </button>                            
+                            <button class="btn btn-voir-plus float-right">
+                                <a href="/add-to-cart/<%= article.id %>">Acheter</a>
+                            </button>
+                        </div>                
+                    </div>     
+                    <hr>
+                </section>
+            
+            <% }); %>
 
-            </section>
-            
-            
-            <section id ="section1">
-            <h1>Skerb Gloan</h1>
-            <h2>Echarpe en laine</h2>
-            <p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p>
-            <div class="wrapper">
-                <img class="" src="https://images.unsplash.com/photo-1510597567824-8436873034f9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6d8280645ac2ae43ff3503804b445552&auto=format&fit=crop&w=1353&q=80"/>
-                <div class="description">
-                    <p class="description-content">
-                        Skerb Gloan 25€
-                    </p>
-                </div>
-            </div>
-
-            <p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p>
-            <p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p><p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p>
-            </section>
-            
-            
-            <section id ="section1">
-            <h1>Boned</h1>
-            <h2>Bonnet chaud en laine</h2>
-            <p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p>
-            <div class="wrapper">
-                <img class="" src="https://images.unsplash.com/photo-1480358074177-c2f76f7e00d3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=18a218a162099b0ae35cef1a049c3f61&auto=format&fit=crop&w=1350&q=80"/>
-                <div class="description">
-                    <p class="description-content">
-                        Boned 20€
-                    </p>
-                </div>
-            </div>
-
-            <p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p><p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p>
-            </section>
-            
-            
-            <section id ="section1">
-            <h1>Kelc'h</h1>
-            <h2>Bracelet au crochet</h2>
-            <p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p>
-            <div class="wrapper">
-                <img class="" src="https://images.unsplash.com/photo-1512820900002-b67e44b68c2f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=02c488cd057d5c88458c5cc80fffc411&auto=format&fit=crop&w=1350&q=80"/>
-                <div class="description">
-                    <p class="description-content">
-                        Kelc'h 10€
-                    </p>
-                </div>
-            </div>
-
-            <p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p><p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p>
-            </section>
-    
-
-            
-            <section id ="section1">
-            <h1>Arzh Gwenn</h1>
-            <h2>Ours polaire au crochet</h2>
-            <p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p>
-            <div class="wrapper">
-                <img class="" src="https://i.pinimg.com/564x/ad/8a/ce/ad8acefcff0f8ae5bd14cd161dd10142.jpg"/>
-                <div class="description">
-                    <p class="description-content">
-                        Arzh Gwenn 10€
-                    </p>
-                </div>
-            </div>
-
-    
-            <p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p><p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p>
-            </section>
-            
-            <section id ="section1">
-            <h1>Arzh Roz</h1>
-            <h2>Ours au crochet</h2>
-            <p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p>
-            <div class="wrapper">
-                <img class="" src="https://i.pinimg.com/564x/eb/5d/58/eb5d584db1e93a25e47b51668481b134.jpg"/>
-                <div class="description">
-                    <p class="description-content">
-                        Arzh Roz 10€
-                    </p>
-                </div>
-            </div>
-
-    
-            <p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p><p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p>
-            </section>
-            
-            <section id ="section1">
-            <h1>Arzh Gell</h1>
-            <h2>Ours brun au crochet</h2>
-            <p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p>
-            <div class="wrapper">
-                <img class="" src="https://i.pinimg.com/564x/ee/b1/b1/eeb1b151a1290e687e178aa74146d421.jpg"/>
-                <div class="description">
-                    <p class="description-content">
-                        Arzh Gell 10€
-                    </p>
-                </div>
-            </div>
-
-
-            <p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p><p>Once we overcame the hurdle of reliably identifying a device and building a system that handled email processing, we finally had all of the ingredients we needed for a simple yet effective experience.</p>
-            </section>
-    
-                
-            
         </div>
     </div>
 

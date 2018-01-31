@@ -1,26 +1,40 @@
 <% include ../partials/header %>
     <div class="row">
-        <h1 style="text-align: center">Create a New Article</h1>
+        <h1 style="text-align: center">Ajouter un article</h1>
         <div style="width: 30%; margin: 25px auto;">
             <form action="/articles" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="article[name]" placeholder="name" required>
+                    <input class="form-control" type="text" name="article[nom]" placeholder="nom" required>
                 </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="article[nomSecondaire]" placeholder="nomSecondaire" required>
+                </div>                
                 <div class="form-group">
                     <label for="image">Image</label>
                     <input type="file" id="image" name="image" accept="image/*" required>
                 </div>
                 <div class="form-group">
+                    <input class="form-control" type="text" name="article[couleurTheme]" placeholder="Couleur d'accompagnement" required>
+                </div>                
+                <div class="form-group">
                     <input class="form-control" type="text" name="article[description]" placeholder="description" required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="number" name="article[cost]" placeholder="cost" step="0.1" min="0" required>
+                    <input class="form-control" type="text" name="article[descriptionTechnique]" placeholder="descriptionTechnique" required>
+                </div>                
+                <div class="form-group">
+                  <input class="form-control" type="number" name="article[prix]" placeholder="prix" step="0.1" min="0" required>
                 </div>   
                 <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                    <label for="illustration">Illustration</label>
+                    <input type="file" id="illustration" name="illustration" accept="image/*" >
+                </div>
+                
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Valider</button>
                 </div>
             </form>
-            <a href="/articles">Go Back</a>
+            <a href="/articles">Retour à la page d'accueil</a>
         </div>
     </div>
 <% include ../partials/footer %>
