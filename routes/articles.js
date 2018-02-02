@@ -67,7 +67,7 @@ router.get("/", function(req, res){
         // Get found articles from DB
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         // Get all articles from DB    
-        article.find({name: regex}, function(err, allarticles){
+        article.find({nom: regex}, function(err, allarticles){
            if(err){
                console.log(err);
            } else {

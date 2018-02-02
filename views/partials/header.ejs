@@ -46,14 +46,22 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="<%= typeof page !== 'undefined' && page === 'articles' ? 'active' : '' %>"><a href="/articles">Home</a></li>
+                    <li class="<%= typeof page !== 'undefined' && page === 'articles' ? 'active' : '' %>"><a href="/articles">Articles</a></li>
                 </ul>
+                <ul class="nav navbar-nav">
+                    &nbsp;
+                </ul>                
+                
+                <ul class="nav navbar-nav">
                     <form action="/articles" method="GET" class="navbar-form navbar-left">
                         <div class="form-group">
-                            <input type="text" name="search" placeholder="Search pattern" class="form-control">
-                            <input type="submit" value="Search" class="btn btn-default">
+                            <input type="text" name="search" placeholder="Rechercher" class="form-control">
+                            
+                            <input type="submit" value="Rechercher" class="btn btn-default">
                         </div>
                     </form>
+                </ul>                
+
                 <!--<ul class="nav navbar-nav ">-->
                 <!--    <li>-->
                 <!--        <a href="#">About Us</a>-->
@@ -74,7 +82,7 @@
                 <!--</ul>-->
                   <ul class="nav navbar-nav navbar-right">
                   <li>
-                      <a href="/cart"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i> Shopping Cart <span class="badge"><%= session.cart.totalQty %></span></a>
+                      <a href="/cart"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i> Mon Panier <span class="badge"><%= session.cart.totalQty %></span></a>
                   </li>
                   <% if(!currentUser){ %>
                       <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>
@@ -82,6 +90,8 @@
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><span class="caret"></span></a>
                           <ul class="dropdown-menu">
+                            <!-- itérer sur les produits de la vitrine  -->
+                            <li role="separator" class="divider"></li> 
                             <li><a href="#">FAQ</a></li>
                             <li><a href="#">Contact us</a></li>
                             <li><a href="#">About us</a></li>

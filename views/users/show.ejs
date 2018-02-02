@@ -1,31 +1,104 @@
 <% include ../partials/header %>
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <h1><%= user.username %></h1>        
+        <div class="col-md-12">    
+                    <h1 style="text-align:center;"><%= user.username %></h1>        
             <div class="thumbnail">
                   <img src="<%= user.avatar %>" alt="user profile image">          
                   <div class="caption"><a href="mailto:<%= user.email %>"><%= user.email %></a></div>
-            </div>
+            </div>  
+        </div>
+        <div class="col-md-6">
+            <img class="img-responsive user-image-round" src="https://images.unsplash.com/photo-1513986727526-d32d19c2437b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=036c06864ac6323867863695572249b1&auto=format&fit=crop&w=634&q=80">
+            <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto odit numquam, reiciendis commodi totam ad reprehenderit et accusantium excepturi. Molestias consequatur mollitia, illo officia cupiditate tenetur id iure corrupti placeat!
             
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, hic repellendus harum obcaecati quas repudiandae id accusamus quod modi tempore, perspiciatis quibusdam cupiditate earum cumque distinctio labore vero sequi possimus.
-    
+    </p>
         </div>
         <% if (user.isVendor){ %>
-        <div class="col-md-8">
-            <h3><%= user.username %>'s articles : </h3>
-            <ul>
+            <div class="col-md-6">
+                 <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto odit numquam, reiciendis commodi totam ad reprehenderit et accusantium excepturi. Molestias consequatur mollitia, illo officia cupiditate tenetur id iure corrupti placeat!
+                
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, hic repellendus harum obcaecati quas repudiandae id accusamus quod modi tempore, perspiciatis quibusdam cupiditate earum cumque distinctio labore vero sequi possimus.
+                </p>
+            </div>
+            <div class="col-md-6"> 
+                <h1 style="text-align:center;">Articles de <%= user.username %></h1>
+                    
+                <!-- Carousel
+                ================================================== -->
+ 
+                
                 <% articles.forEach(function(article) { %>
-                    <li><a href="/articles/<%= article.id %>"><%= article.nom %></a></li>
+                    <div class="wrapper" style="display:none;">
+                        <span style="visibility:hidden;"><a href='/articles/<%= article._id %>'><img class="im" width="0px" src=<%= article.image %>></a>
+                        <div class="description" style="width:auto;">
+                            <p class="description-content">
+                                <%= article.nom %>&nbsp;<%= article.prix %>&nbsp;&euro;
+                            </p>
+                        </div>                        
+                        </span>                        
+                    </div> 
+
                 <% }); %>
-            </ul>
-        </div>
+                <div id="myCarousel" class="carousel slide col-md-12 product-title">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                  </ol>
+                  <div class="carousel-inner">
+                   
+                  </div>
+                  <!-- Controls -->
+                  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="icon-prev"></span>
+                  </a>
+                  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="icon-next"></span>
+                  </a>  
+                </div>
+                <!-- /.carousel -->               
+            
+            
+
+            </div>
         <% }; %>
     </div>
 </div>
-    <script>
+<script>
         $('#heading-banner').css('display', 'none');
-    </script>
+</script>
+<script>
+$(document).ready(function(){  
     
+    // avatar
+    var avatar = "<%=user.avatar %>";
+    var id = "<%=user.id %>";
+    if (avatar) {
+        // alert (id);
+        $('.img-circular').css('background-image', "url(" + avatar +")");
+        $('.img-circular').css('href', "url(/users/" + id +")");
+    }
+    
+    $('#heading-banner').css('display', 'none');
+    var linkArray = $("img.im").map(function() {
+        return $(this).attr('src');
+    }).get();
+    
+    var captionArray = $("p.description-content").map(function() {
+        return $(this).text();
+    }).get();
+    // console.log(linkArray);
+
+    for(var i=0 ; i< linkArray.length ; i++) {
+        $('<div class="item"><img src="'+linkArray[i]+'"><div class="carousel-caption">'+ captionArray[i] +'</div>   </div>').appendTo('.carousel-inner');
+        $('<li data-target="#carousel-example-generic" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators');
+    }
+    $('.item').first().addClass('active');
+    $('.carousel-indicators > li').first().addClass('active');
+    $('#carousel-example-generic').carousel();
+
+});        
+</script>    
 <% include ../partials/footer %>

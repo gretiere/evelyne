@@ -18,7 +18,7 @@
          </p>        
         <% };%>
         
-        <h1>Tous les articles</h1>
+        <h1 style="text-align:center;">Tous les articles</h1>
         
         <div class="row text-center" style="display:flex; flex-wrap: wrap;">
 
@@ -28,7 +28,7 @@
                         <a class=" js-img-viwer" href="<%= article.image %>" >
                             <div class="crop-to-square">
                                 <div class="crop-to-square-positioner img-text-overlay">
-                                    <img class="crop-to-square-img " src="<%= article.image %>" alt="Park">
+                                    <img class="crop-to-square-img" src="<%= article.image %>" alt="<%= article.nom %>">
                                 </div>
                             </div>
                         </a>   
