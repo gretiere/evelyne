@@ -35,7 +35,7 @@ p {
             font-size: 26px;
     line-height: 39px;
     font-weight: 400;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 #login-box {
   position: relative;
@@ -192,6 +192,7 @@ button.social-signin.google {
 button.btn-voir-plus {
     background-color: #9575cd;
     color: #fff;
+    margin-top: 5px;
 }
 
 button.btn-voir-plus:hover {
@@ -424,10 +425,10 @@ p.description-content {
 } 
 .btn-add-cart {
     margin: 20px auto;
-    font-family: 'Lato', sans-serif;
-    font-size: 1.5em;
     font-weight: 400;
-    background-color: #FF4081;
+    /*background-color: #FF4081;*/
+    background-color: #9575cd;
+
     color: #fff;
     text-transform: uppercase;
     border: none;
@@ -485,6 +486,12 @@ p.description-content {
 /*
  Products
 */
+.product {
+    position: relative;
+    overflow: hidden;
+    margin: 30px auto;
+}
+
 .product-image {
     position: relative;
     overflow: hidden;
@@ -503,27 +510,33 @@ p.description-content {
 }
 
 .product-title {
-    font-family: 'Lato', sans-serif;
-    font-size: 20px;
-    font-weight: 300;
-    color: #87a7a6;
-    background-color: #fff;   
+    font-family: "Helvetica Neue",Helvetica,"pragmatica-web",Arial,sans-serif;  
+    letter-spacing: -0.04em;
+    font-size: 36px;
+    font-weight: 700;
+    color: #000;
     text-align: left;
-    margin: 0 auto;
-    padding: 10px;
 }
-
+.product-subtitle {
+    font-family: "Helvetica Neue",Helvetica,"pragmatica-web",Arial,sans-serif;  
+    letter-spacing: -0.04em;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    text-align: left;
+}
 .product-item {
     font-size: 1em;
+    line-height: normal;    
     text-align: left;
 }
 
 .product-price {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "PT Serif",Georgia,Times,"Times New Roman",serif;
+    color:#546e7a;
     font-size: 1.5em;
-    font-weight: 700;
+    font-weight: 400;
     text-align: center;
-    color: #000;
 }
 
 .product-id {

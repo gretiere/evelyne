@@ -21,13 +21,9 @@
                     </div> 
                     <p><%= article.descriptionTechnique %></p>
                     <div class="produkt">
-                        <%= article.nom %>
-                        <div class="produkt-price">
-                        <%= article.prix %>&nbsp;&euro;
-                        </div>
                         <div class="produkt-add">
                             <button class="btn btn-voir-plus float-right">
-                                <a href="/articles/<%= article.id %>">Voir l'article</a>
+                                <a href="/articles/<%= article.id %>">Voir plus</a>
                             </button>                            
                             <button class="btn btn-voir-plus float-right">
                                 <a href="/add-to-cart/<%= article.id %>">Acheter</a>

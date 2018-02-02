@@ -2,76 +2,57 @@
 <div class="container">
     
     <div class="row">
-        <div class="col-md-12" >
-            <p class="lead product-header">Article</p>
-        </div>
-        <div class="col-md-12" >
-            <p class="lead product-title"><%=article.nom%></p>
-        </div>
-        <div class="col-md-12" >
-            <p class="lead product-title"><%=article.nomSecondaire%></p>
-        </div>
         <div class="row product flexbox">
-            <div class="col-md-4 product-grid">
+            <div class="col-md-6 product-grid">
                 <img class="img-responsive product-image" src="<%= article.image %>">
             </div>
-            <div class="col-md-4 product-grid">
-               
-                <div class ="row">
-                    <div class="col-md-6">
-                        <h4 class="product-item">Id Produit : <%= article._id %></h4>
-                    </div>  
+            <div class="col-md-6 product-grid">
+                <div class="col-md-12" >
+                    <p class="lead product-title" style="color:<%= article.couleurTheme %>;"><%=article.nom%></p>
                 </div>
-                <div class ="row">
-                     <div class="col-md-6">
-                        <h4 class="product-item">Prix de vente : &nbsp;<span class="product-price"><%= article.prix %> &euro;</span></h4>
-                    </div>  
-                </div>
+                <div class="col-md-12" >
+                    <p class="lead product-subtitle" style="color:#546e7a;"><%=article.nomSecondaire%></p>
+                </div>               
+                 <div class="col-md-12">
+                    <h4 class="product-item"><span class="product-price"><%= article.prix %> &euro;</span></h4>
+                </div>  
 
                 <% if((currentUser && article.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)){ %>
-                    <div class ="row">
-                        <div class="col-md-6">
-                            <a class="btn btn-xs btn-warning" href="/articles/<%= article._id %>/edit">Modifier</a>
-                            <form id="delete-form" action="/articles/<%= article._id %>?_method=DELETE" method="POST">
-                                <button class="btn btn-xs btn-danger">Supprimer</button>
-                            </form>
-                        </div>  
-                    </div>                             
+                    <div class="col-md-12">
+                        <a class="btn btn-xs btn-warning" href="/articles/<%= article._id %>/edit">Modifier</a>
+                        <form id="delete-form" action="/articles/<%= article._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">Supprimer</button>
+                        </form>
+                    </div>  
                 <% }%>
 
-                <div class ="row">
-                     <div class="col-md-6">
-                        <h4 class="product-item">Vendu par : <a href="/users/<%= article.author.id %>"><%= article.author.username %></a>
-                        <img class="img-circular"></h4>
-                    </div>  
-                </div>      
-                
-                <div class ="row">
-                     <div class="col-md-6">
-                        <div class="green"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span><strong> En stock,</strong> expédition aujourd'hui</div>
-                    </div>  
-                </div>      
-                <div class ="row">
-                     <div class="col-md-6">
-                        <button class="btn btn-add-cart"><a href="/add-to-cart/<%= article._id %>">Ajouter au panier</a></button>
-                    </div>  
-                </div>                  
-                
-                
-                <div class ="row">
-                     <div class="col-md-12 ">
-                        <h4 class="product-item">Description du produit :</h4>
-                        <p>
-                            <%= article.description %>
-                        </p>
-                    </div>  
-                     <div class="col-md-12 ">
-                        <h4 class="product-item">Description technique :</h4>
-                        <p>
-                            <%= article.descriptionTechnique %>
-                        </p>
-                    </div>                      
+                <div class="col-md-12">
+                    <h4 class="product-item">Vendu par : <a href="/users/<%= article.author.id %>"><%= article.author.username %></a>
+                    <img class="img-circular"></h4>
                 </div>  
+
+                 <div class="col-md-12">
+                    <div class="green"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span><strong> En stock,</strong> expédition aujourd'hui</div>
+                </div>  
+                 <div class="col-md-12">
+                    <button class="btn btn-add-cart"><a href="/add-to-cart/<%= article._id %>">Ajouter au panier</a></button>
+                </div>  
+            
+                <div class="col-md-12">
+                    <p class="product-item">Id Produit : <%= article._id %></p>
+                </div>  
+                 <div class="col-md-12 ">
+                    <p class="product-item"><strong>Description du produit :</strong></p>
+                    <p class="product-item">
+                        <%= article.description %>
+                    </p>
+                </div>  
+                 <div class="col-md-12 ">
+                    <p class="product-item"><strong>Description technique :</strong></p>
+                    <p class="product-item">
+                        <%= article.descriptionTechnique %>
+                    </p>
+                </div>                      
             </div> 
 
         </div>
