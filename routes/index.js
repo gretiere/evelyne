@@ -56,6 +56,7 @@ router.get("/", function(req, res){
     req.session.cart = cart;
     console.log(req.session);
     Article.find({}, function(err, allarticles){
+        req.session.articles = allarticles;
         req.session.save(function(){
             res.render("landing" , {articles: allarticles} );
         });
