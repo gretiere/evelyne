@@ -9,6 +9,8 @@ var articleSchema = new mongoose.Schema({
    nom: String,
    nomSecondaire: String,
    image: String,
+   image2 :String,
+   image3 :String,
    illustration: String,
    description: String,
    descriptionTechnique: String,   

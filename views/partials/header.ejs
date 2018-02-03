@@ -53,13 +53,14 @@
                 </ul>                
                 
                 <ul class="nav navbar-nav">
-                    <form action="/articles" method="GET" class="navbar-form navbar-left">
-                        <div class="form-group">
-                            <input type="text" name="search" placeholder="Rechercher" class="form-control">
-                            
-                            <input type="submit" value="Rechercher" class="btn btn-default">
-                        </div>
-                    </form>
+                    <form action="/articles" method="GET" class="navbar-form" role="search">
+                		<div class="input-group">
+                			<input type="text" class="form-control" placeholder="Votre recherche" name="search" id="search">
+                			<div class="input-group-btn">
+                				<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                			</div>
+	                	</div>
+		            </form>
                 </ul>                
 
                 <!--<ul class="nav navbar-nav ">-->
@@ -81,8 +82,10 @@
                     
                 <!--</ul>-->
                   <ul class="nav navbar-nav navbar-right">
+                      
+                      
                   <li>
-                      <a href="/cart"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i> Mon Panier <span class="badge"><%= session.cart.totalQty %></span></a>
+                      <a href="/cart"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>&nbsp;<span class="badge"><%= session.cart.totalQty %></span></a>
                   </li>
                   <% if(!currentUser){ %>
                       <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>

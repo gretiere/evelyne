@@ -206,8 +206,9 @@ button.btn-voir-plus a {
     text-decoration: none;
 }
 
+
 #userActions{
-	height: 150px;
+	height: 250px;
 	vertical-align: middle;
 	text-align: center;
 	color: #37474F;
@@ -220,17 +221,17 @@ button.btn-voir-plus a {
 	margin: auto;
 }
 
-#userActions input{
-	margin: auto;
+#imgPrime{ 
+    display: none; 
+    max-width: 250px;
+    max-height: 150px;
 }
 
-#userActions p{
-	min-height: 60%;
+#image{ 
+    display: none; 
+    max-width: 250px;
+    max-height: 150px;
 }
-
-
-#imgPrime{ display: none; }
-
 
 .colorblue h1, .colorblue h2, .colorblue .star {
     color: #00838f;

@@ -4,6 +4,7 @@ var article = require("../models/article");
 var user = require("../models/user");
 var middleware = require("../middleware");
 var multer = require("multer");
+var fs = require("fs");
 
 /*******************************************
                   cloudinary
@@ -21,7 +22,7 @@ var imageFilter = function (req, file, cb) {
     }
     cb(null, true);
 };
-var upload = multer({ storage: storage, fileFilter: imageFilter});
+var upload = multer({ storage: storage, fileFilter: imageFilter, limits: { fieldSize: 25 * 1024 * 1024 }});
 
 var cloudinary = require('cloudinary');
 cloudinary.config({ 
@@ -104,57 +105,98 @@ router.get("/", function(req, res){
 
 //NEW - show form to create new article
 router.get("/new", middleware.isLoggedIn, function(req, res){
-   console.log("currentUser article/new" + req.user);
-   req.session.save(function(){
-       res.render("articles/new"); 
-   });
+  console.log("currentUser article/new" + req.user);
+  req.session.save(function(){
+      res.render("articles/new"); 
+  });
    
 });
 
-//CREATE - add new article to DB
-router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res) {
-    // get data from form and add to articles array
-    console.log("currentUser article/create" + req.user);
-    console.log("currentUser middleware.isLoggedIn" + req.isAuthenticated);
-    // eval(require("locus"));
-    cloudinary.uploader.upload(req.file.path, function(result) {
-          // add cloudinary url for the image to the campground object under image property
-          req.body.article.image = result.secure_url;
-          // add author to campground
-          req.body.article.author = {
-            id: req.user._id,
-            username: req.user.username
-          };
-          article.create(req.body.article, function(err, article) {
-            if (err) {
-              req.flash('error', err.message);
-              return res.redirect('back');
-            }
-            console.log("currentUser article/create" + req.user);
-            console.log("currentUser middleware.isLoggedIn" + req.isAuthenticated);
-            req.session.save(function() {
-                res.redirect('/articles/' + article.id);
-            });
+// //CREATE - add new article to DB
+// router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res) {
+//     // get data from form and add to articles array
+//     console.log("currentUser article/create" + req.user);
+//     console.log("currentUser middleware.isLoggedIn" + req.isAuthenticated);
+//     // eval(require("locus"));
+//     cloudinary.uploader.upload(req.file.path, function(result) {
+//           // add cloudinary url for the image to the campground object under image property
+//           req.body.article.image = result.secure_url;
+//           // add author to campground
+//           req.body.article.author = {
+//             id: req.user._id,
+//             username: req.user.username
+//           };
+//           article.create(req.body.article, function(err, article) {
+//             if (err) {
+//               req.flash('error', err.message);
+//               return res.redirect('back');
+//             }
+//             console.log("currentUser article/create" + req.user);
+//             console.log("currentUser middleware.isLoggedIn" + req.isAuthenticated);
+//             req.session.save(function() {
+//                 res.redirect('/articles/' + article.id);
+//             });
                 
             
-          });
-    },  
-        {
-            public_id: article.id, 
-            crop: 'limit',
-            width: 640,
-            height: 640,
-            eager: [
-              { width: 200, height: 200, crop: 'thumb', gravity: 'face',
-                radius: 20, effect: 'sepia' },
-              { width: 100, height: 150, crop: 'fit', format: 'png' }
-            ],                                     
-            tags: ['special', 'for_homepage']
+//           });
+//     },  
+//         {
+//             public_id: article.id, 
+//             crop: 'limit',
+//             width: 640,
+//             height: 640,
+//             eager: [
+//               { width: 200, height: 200, crop: 'thumb', gravity: 'face',
+//                 radius: 20, effect: 'sepia' },
+//               { width: 100, height: 150, crop: 'fit', format: 'png' }
+//             ],                                     
+//             tags: ['special', 'for_homepage']
+//           }      
+//     );
+// });
+
+
+ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res) {
+    // get data from form and add to articles array
+    if (req.body.avatarSrcName != "") {
+        var block = req.body.avatarSrcName.split(";");
+        let base64Image = req.body.avatarSrcName.split(';base64,').pop();
+        var tempFile = "./public/data/" + req.params.id + ".png";
+        fs.writeFile(tempFile, base64Image, {encoding: 'base64'}, function(err) {
+            cloudinary.uploader.upload(tempFile,  function(result) {        
+              req.body.article.image = result.secure_url;
+              req.body.article.author = {
+                id: req.user._id,
+                username: req.user.username
+              };
+              article.create(req.body.article, function(err, article) {
+                if (err) {
+                  req.flash('error', err.message);
+                  return res.redirect('back');
+                }
+                req.session.save(function() {
+                  res.redirect('/articles/' + article.id);
+                });            
+              });
+          },  
+          {
+              public_id: article.id, 
+              crop: 'limit',
+              width: 640,
+              height: 640,
+              eager: [
+                { width: 200, height: 200, crop: 'thumb', gravity: 'face',
+                  radius: 20, effect: 'sepia' },
+                { width: 100, height: 150, crop: 'fit', format: 'png' }
+              ],                                     
+              tags: ['special', 'for_homepage']
           }      
-    );
+        );
+    });     
+  } else  {
+      console.log("Case else");
+  }
 });
-
-
 
 // SHOW - shows more info about one article
 router.get("/:id", function(req, res){

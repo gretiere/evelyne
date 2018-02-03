@@ -1,4 +1,4 @@
-const title = "VLK"
+const title = "MPL"
 const subTitle = "Very Little Kompany"
 const bannerTitleH1 = "Section 1 : Title"
 const bannerTitleH2 = "Section 2 : Title"
