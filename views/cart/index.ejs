@@ -1,45 +1,70 @@
 <% include ../partials/header %>
-<div class="row display-flex" style="display:flex; flex-wrap: wrap;">
-	<div class="col-md-12">
-	    <div class="table-responsive">
-	        <table id="mytable" class="table table-bordred table-striped">
-	            <thead>
-	                <th><input type="checkbox" id="checkall" /></th>
-	                <th>&nbsp;</th>
-	                <th>Article Id</th>
-	                <th>Description</th>
-	                <th>Price</th>
-	                <th>Quantity</th>
-	                <th>Total Price</th>
-	                <th>Edit</th>
-	                <th>Delete</th>
-	            </thead>
-                <tbody>
-                    <% articles.forEach(function(article){ %>
-                    <div class="thumbnail">
-                    <tr>
-                        <td><input type="checkbox" class="checkthis" /></td>
-                        <td><div style="width:20%;"><img src="<%= article.item.image %>" class="img img-responsive full-width media-photo"></div></td>
-                        <td><%= article.item._id %></td>
-                        <td><%= article.item.nom %></td>
-                        <td><%= article.item.prix %></td>
-                        <td><%= article.qty %></td>
-                        <td><%= article.prix %></td>
-                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                        <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-                    </tr>
+<div class="container">
+    
+    <div class="row display-flex" style="display:flex; flex-wrap: wrap;">
+    	<div class="col-md-12">
+    	    <div class="table-responsive">
+    	        <!-- Tester si panier vide -->
+    	        <% if( totalQty==0 ){ %>
+    	            <h2>Votre panier est vide !</h2>
+    	        <% } else { %>
+        	        <div class="col-md-8">
+        	        <h2>Votre panier</h2>
+        	        <table id="mytable" class="table table-bordred table-striped">
+        	            <thead>
+        	                <th width="200px">&nbsp;</th>
+        	                <th>&nbsp;</th>
+        	                <th><span class="listePanierTh">Prix</span></th>
+        	            </thead>
+                        <tbody>
+                            <% articles.forEach(function(article){ %>
+                                
+                                <tr>
+                                    <td><span style="width:200px;"><img src="<%= article.item.image %>" class="img img-responsive full-width media-photo"></span></td>
+                                    <td>
+                                        <span class="listePanierItem"><%= article.item.nom %></span>
+                                        <div class="green"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span><strong> En stock,</strong> expédition aujourd'hui</div>
+                                        <span class="listePanierKdo"><p>Ceci sera un cadeau</p></span>
+                                        <p title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p>
+                                    </td>
+                                    <td><span class="listePanierPrix">EUR <%= Number(article.item.prix).toFixed(2) %></span></td>
+                                 </tr>
+    
+                            <% }); %>
+                        </tbody>
+                    </table>
                     </div>
-                    <% }); %>
-                </tbody>
-            </table>
-        </div>
-    </div>	   
-    <div class="container">
-        <a href="/cart/checkout" id="checkout" class="btn btn-default pull-right">Checkout</a>      
+                    <div class="col-md-4">
+                        
+                        <div class="listePanierPaiement">
+                            <h2>Sous-total</h2>
+                            <div class="listePanierPrix">
+                                EUR <%= Number(totalPrice).toFixed(2) %>
+                            </div>
+                            <h4> <%= totalQty %> article(s)</h4>
+                            <button width="100%" class="btn btn-checkout float-right">
+                                <a href="/cart/checkout" id="checkout" >Je passe commande</a>                                   
+                            </button>        
+                            <!--<span style="overflow: hidden;">-->
+                            <!--     <p><img width="50%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUi4k34sSQCatgfIz-24qXeD-cpuwLRWSADpRYe740wLFT6HAtAw"></p>-->
+                            <!--</span>-->
+                            <span class="listePanierKdo">
+                                <p>Livraison en France métroploitaine : €7.25</p>
+                                <p><i class="fa fa-truck fa-2x" style="color:#212121;"></i>&nbsp; Gratuit à partir de €15.00 d'achats !</p>
+                                <p></p>
+                                <img width="220px" src="http://www.serie-noire.com/wp/wp-content/uploads/2015/09/logo-paiements.png" alt="CB Visa Mastercard Amex Paypal accepté">
+                            </span>
+    
+                        </div>
+                    </div>    	        
+    	        <% }; %>
+
+            </div>
+        </div>	   
+
+    
     </div>
-
 </div>
-
     <script>
         $('#heading-banner').css('display', 'none');
     </script>

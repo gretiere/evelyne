@@ -41,7 +41,7 @@ app.use(flash());
 var session = require("express-session");
 var MongoStore = require("connect-mongo")(session);
 app.use(session({
-    secret: "Once again Rusty wins cutest dog!",
+    secret: "s3Cur3",
     resave: true,
     saveUninitialized: false,
     store : new MongoStore({ mongooseConnection: mongoose.connection })

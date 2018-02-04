@@ -2,6 +2,48 @@
 /*    width: 100%;*/
 /*}*/
 
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
 
 *:focus {
   outline: none;
@@ -231,6 +273,105 @@ button.btn-voir-plus a {
     display: none; 
     max-width: 250px;
     max-height: 150px;
+}
+
+.listePanierItem {
+    font-family: "Helvetica Neue",Helvetica,"pragmatica-web",Arial,sans-serif;  
+    letter-spacing: -0.04em;
+    font-size: 20px;
+    font-weight: 700;
+    color:#212121;
+}
+
+.listePanierPrix {
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 700;
+    color:#d32f2f;
+}
+
+
+.listePanierKdo p {
+    font-family: Lato,Arial,sans-serif;     
+    font-size: 14px;
+    font-weight: 400;
+    color: #212121;
+    line-height: 1em    ;
+}
+
+.listePanierPaiement {
+    margin-top: 95px;
+    padding: 20px;
+    border: solid 1px;
+    border-width: thin; 
+    border-color: #ccc;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+.listePanierPaiement h2{
+    font-family: "Helvetica Neue",Helvetica,"pragmatica-web",Arial,sans-serif;  
+    letter-spacing: -0.04em;
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: -10px;
+    color:#212121;
+}
+
+.listePanierPaiement h4{
+    font-family: "Helvetica Neue",Helvetica,"pragmatica-web",Arial,sans-serif;  
+    letter-spacing: -0.04em;
+    font-size: 18px;
+    font-weight: 700;
+    color:#212121;
+}
+
+.listePanierTh {
+    font-family: Lato,Arial,sans-serif;     
+    font-size: 14px;
+    font-weight: 300;
+    color: #212121;    
+}
+
+
+button.btn-checkout {
+    background-color: #4fc3f7;
+    color: #212121;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+button.btn-checkout:hover {
+    background-color: #81d4fa;
+    color: #212121;
+    text-decoration: none;
+}
+
+button.btn-checkout a {
+    color: #37474f;
+    text-decoration: none;
+}
+
+.panierCheckout {
+    font-family: "Helvetica Neue",Helvetica,"pragmatica-web",Arial,sans-serif;  
+    letter-spacing: -0.04em;
+    font-size: 18px;
+    font-weight: 700;
+    color:#212121;    
+}
+
+.panierCheckout h1{
+    font-family: "Helvetica Neue",Helvetica,"pragmatica-web",Arial,sans-serif;  
+    letter-spacing: -0.04em;
+    margin-top: 30px;
+    margin-bottom:  -50px;    
+}
+
+.panierCheckout label{
+    font-family: "Helvetica Neue",Helvetica,"pragmatica-web",Arial,sans-serif;  
+    letter-spacing: -0.04em;
+    font-size: 14px;
+    font-weight: 300;
+    color:#455a64;    
 }
 
 .colorblue h1, .colorblue h2, .colorblue .star {

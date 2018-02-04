@@ -4,7 +4,14 @@
     <div class="row">
         <div class="row product flexbox">
             <div class="col-md-6 product-grid">
-                <img class="img-responsive product-image" src="<%= article.image %>">
+                <a class=" js-img-viwer" href="<%= article.image %>" >
+                    <div class="crop-to-square">
+                        <div class="crop-to-square-positioner img-text-overlay">
+                            <img class="crop-to-square-img" src="<%= article.image %>" alt="<%= article.nom %>">
+                        </div>
+                    </div>
+                </a>                   
+
             </div>
             <div class="col-md-6 product-grid">
                 <div class="col-md-12" >
@@ -14,7 +21,7 @@
                     <p class="lead product-subtitle" style="color:#546e7a;"><%=article.nomSecondaire%></p>
                 </div>               
                  <div class="col-md-12">
-                    <h4 class="product-item"><span class="product-price"><%= article.prix %> &euro;</span></h4>
+                    <h4 class="product-item"><span class="product-price"><%= Number(article.prix).toFixed(2) %> &euro;</span></h4>
                     <h6>plus frais de livraison</h6>
                 </div>  
 
@@ -38,12 +45,30 @@
                  <div class="col-md-12">
                     <button class="btn btn-add-cart"><a href="/add-to-cart/<%= article._id %>">Ajouter au panier</a></button>
                 </div>  
-            
+
                 <div class="col-md-12">
-                    <p class="product-item">Id Produit : <%= article._id %></p>
-                </div>  
+                    <fieldset class="rating">
+                        <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                        <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                        <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                        <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                        <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                        <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                    </fieldset>
+                </div>
+
+
+
+
+            
+
                  <div class="col-md-12 ">
                     <p class="product-item"><strong>Description du produit :</strong></p>
+                    <p class="product-item">Id Produit : <%= article._id %></p>
                     <p class="product-item">
                         <%= article.description %>
                     </p>
@@ -153,6 +178,34 @@ $(document).ready(function(){
     $('#carousel-example-generic').carousel();
 
 });        
+</script>
+
+    
+<script> 
+    $(document).ready(function() {
+      var imgs = $('.crop-to-square-img'); //jQuery id selector
+      imgs.each(function() {
+        var img = $(this);
+        var width = img.width(); //jQuery width method
+        var height = img.height(); //jQuery height method
+    
+        if (width < height) {
+          img.css('max-height', '150%');
+    
+        } else {
+          img.css('max-width', '150%');
+          img.css('max-height', 'auto%');
+        }
+      })
+    });
+</script> 
+
+    <!-- plugin pour zoomer sur les images-->
+<script>
+    window.addEventListener('load',function(){
+    	new SmartPhoto(".js-img-viwer");
+        new SmartPhoto(".js-img-viwer-fit");
+    });
 </script>
 
 

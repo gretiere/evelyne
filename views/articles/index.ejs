@@ -36,19 +36,12 @@
                             <h3 class="card-title mt-3"><a href="/articles/<%= article._id %>"><%= article.nom %></a></h3>
                             <h4 class="card-subtitle mt-3"><%= article.nomSecondaire %></h4>
                             <div class="product-price">
-                                <%= article.prix %>€
+                                <%= Number(article.prix).toFixed(2) %> €
                             </div>                            
-                            <div class="card-vendor">
-                                Vendu par <a href="/users/<%= article.author.id %>"><%= article.author.username %></a>
-                            </div>
                             <button class="btn btn-voir-plus float-right">
                                 <a href="/articles/<%= article._id %>">Informations produit</a>
                             </button>    
-                            <div class="card-text">
-                                <p><%= article.description %></p>
-                            </div>
-                        </div>
-                      
+
                     </div>
                 </section>            
             <% }); %>
@@ -102,24 +95,24 @@
         
     </script>
     
-<script> 
-$(document).ready(function() {
-  var imgs = $('.crop-to-square-img'); //jQuery id selector
-  imgs.each(function() {
-    var img = $(this);
-    var width = img.width(); //jQuery width method
-    var height = img.height(); //jQuery height method
-
-    if (width < height) {
-      img.css('max-height', '150%');
-
-    } else {
-      img.css('max-width', '150%');
-      img.css('max-height', 'auto%');
-    }
-  })
-});
-</script> 
+    <script> 
+    $(document).ready(function() {
+      var imgs = $('.crop-to-square-img'); //jQuery id selector
+      imgs.each(function() {
+        var img = $(this);
+        var width = img.width(); //jQuery width method
+        var height = img.height(); //jQuery height method
+    
+        if (width < height) {
+          img.css('max-height', '150%');
+    
+        } else {
+          img.css('max-width', '150%');
+          img.css('max-height', 'auto%');
+        }
+      })
+    });
+    </script> 
 
     <!-- plugin pour zoomer sur les images-->
 	<script>

@@ -12,24 +12,14 @@
                     <div class="star" style="color:#37474f;"><i class="fa fa-star" aria-hidden="true"></i></div>                     
                     <p><%= article.description %></p>
                     <div class="wrapper">
-                        <img class="" src='<%= article.image %>'/>
+                        <a href="/articles/<%= article.id %>"><img class="" src='<%= article.image %>'/></a>
                         <div class="description">
                             <p class="description-content">
-                                <%= article.nom %>&nbsp;<%= article.prix %>&nbsp;&euro;
+                                <%= article.nom %>&nbsp;<%= Number(article.prix).toFixed(2) %>&nbsp;&euro;
                             </p>
                         </div>
                     </div> 
-                    <p><%= article.descriptionTechnique %></p>
-                    <div class="produkt">
-                        <div class="produkt-add">
-                            <button class="btn btn-voir-plus float-right">
-                                <a href="/articles/<%= article.id %>">Voir plus</a>
-                            </button>                            
-                            <button class="btn btn-voir-plus float-right">
-                                <a href="/add-to-cart/<%= article.id %>">Acheter</a>
-                            </button>
-                        </div>                
-                    </div>     
+   
                     <hr>
                 </section>
             

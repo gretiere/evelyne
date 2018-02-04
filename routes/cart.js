@@ -7,11 +7,11 @@ var Order = require("../models/order");
 
 //INDEX - show all articles
 router.get("/", function(req, res){
-    // console.log(req.session.cart);
+    console.log(req.session.cart);
     if (req.session.cart) {
         var cart = new Cart(req.session.cart);
         req.session.save(function(){
-            res.render("cart/index", {articles: cart.generateArray() }); 
+            res.render("cart/index", {articles: cart.generateArray(), totalPrice: cart.totalPrice, totalQty: cart.totalQty }); 
         });
     }
     
