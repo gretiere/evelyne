@@ -312,7 +312,7 @@ router.get("/users/:id/edit", function(req, res){
 // UPDATE article ROUTE
 router.put("/users/:id",  upload.single('image'), function(req, res){
 
-
+      eval(require("locus"))
       // si pas de nouvel avatar, alors il faut passer l'étape uploader mais updater les autres champs
       // eval(require("locus"))
       if (req.body.avatarSrcName != "") {
@@ -387,6 +387,26 @@ router.get("/add-to-cart/:id", function(req, res) {
       req.session.cart = cart;
       res.redirect("/articles");
     });
+    
+});
+
+
+router.get("/delete-from-cart/:id", function(req, res) {
+    var articleId = req.params.id;
+    var cart = new Cart(req.session.cart ? req.session.cart : {});
+    
+    Article.findById(articleId, function(err, article){
+      if(err){
+          console.log(err);
+          return res.render("/", {error: err.message});
+      }
+      
+      cart.delete (article, article.id);
+      // console.log (cart);
+      req.session.cart = cart;
+      res.redirect("/articles");
+    });
+    
     
 });
 

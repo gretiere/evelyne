@@ -1,45 +1,159 @@
 <% include ../partials/header %>
-
     <div class="row">
-        <h1 style="text-align: center">Edit <%= article.name %></h1>
-        <div style="width: 30%; margin: 25px auto;">
-            <form action="/articles/<%= article._id %>?_method=PUT" method="POST">
+        <h1 style="text-align: center">Modifier un article</h1>
+        <div class="container">
+        <div class="col-md-12">
+            <form action="/articles/<%= article._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="article[nom]" value="<%= article.nom %>">
+                    <input class="form-control" type="text" name="article[nom]" placeholder="nom" value="<%= article.nom %>" required>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="article[nomSecondaire]" value="<%= article.nomSecondaire %>">
+                    <input class="form-control" type="text" name="article[nomSecondaire]" placeholder="nomSecondaire" value="<%= article.nomSecondaire %>" required>
+                </div>                
+                <!--<div class="form-group">-->
+                <!--    <label for="image">Image</label>-->
+                <!--    <input type="file" id="image" name="image" accept="image/*" required>-->
+                <!--</div>-->
+                <img src="<%= user.avatar %>" id="img-avatar" name="avatar" class="avatar img-circle" width="96px" height="96px" alt="avatar" style="display:none;">
+                                                
+	            <div id="userActions" >
+	            	<p>Drag &amp; Drop Image</p>
+           	
+	            	<input class="btn btn-default" type="file" name="avatarLoad" id="fileUpload" />
+     	            	<img id="imgPrime" alt="uploaded image placeholder" src="<%= article.image %>"/>	 
+	            	<input type="hidden" name="avatarSrcName" id="avatarSrcName"/>
+	            	<input type="hidden" name="avatar" id="avatarOldName" value=""/>
+	            </div>	                   
+                
+                <!--<div class="form-group">-->
+                <!--    <label for="image">Image 2</label>-->
+                <!--    <input type="file" id="image2" name="image2" accept="image/*" required>-->
+                <!--</div>                -->
+                <div class="form-group">
+                    <input class="form-control" type="text" name="article[couleurTheme]" placeholder="Couleur d'accompagnement" value="<%= article.couleurTheme %>" required>
                 </div>                
                 <div class="form-group">
-                    <input class="form-control" type="text" name="article[image]" value="<%= article.image %>">
+                    <input class="form-control" type="text" name="article[description]" placeholder="description"  value="<%= article.description %>" required>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="article[couleurTheme]"  value="<%= article.couleurTheme %>" placeholder="Couleur d'accompagnement" required>
-                </div>                 
-                <div class="form-group">
-                  <input class="form-control" type="number" name="article[prix]" value="<%= article.prix %>" step="0.1" min="0" required>
+                    <input class="form-control" type="text" name="article[descriptionTechnique]" placeholder="descriptionTechnique" value="<%= article.descriptionTechnique %>" required>
                 </div>                
                 <div class="form-group">
-                    <input class="form-control" type="text" name="article[description]" value="<%= article.description %>">
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="article[descriptionTechnique]" value="<%= article.descriptionTechnique %>">
-                </div>                
-                <div class="form-group">
-                    <label for="image">Photos</label>
-                    <input type="file" id="photo" name="photo" accept="image/*" multiple>
-                </div>                
-                <div class="form-group">
-                    <label for="image">Illustration</label>
-                    <input type="file" id="illustration" name="illustration" accept="image/*" multiple>
-                </div>                  
+                  <input class="form-control" type="number" name="article[prix]" placeholder="prix" step="0.1" min="0" value="<%= article.prix %>" required>
+                </div>   
+                <!--<div class="form-group">-->
+                <!--    <label for="illustration">Illustration</label>-->
+                <!--    <input type="file" id="illustration" name="illustration" accept="image/*" >-->
+                <!--</div>-->
+                
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block">Valider</button>
                 </div>
             </form>
             <a href="/articles">Retour à la page d'accueil</a>
         </div>
+        </div>
     </div>
+    
 
+    <script>
+        'use strict';
+	     $('#heading-banner').css('display', 'none');
+	     $('#imgPrime').css('display', 'inline');
+	   
+        /**
+        // ||||||||||||||||||||||||||||||| \\
+        //	Global Object $: Generic controls
+        // ||||||||||||||||||||||||||||||| \\
+        **/
+        (function($){
+        	// http://stackoverflow.com/questions/4083351/what-does-jquery-fn-mean
+        	var $ = function( elem ){
+        		if (!(this instanceof $)){
+              return new $(elem);
+        		}
+        		this.el = document.getElementById( elem );
+        	};
+        	window.$ = $;
+        	$.prototype = {
+        		onChange : function( callback ){
+        			this.el.addEventListener('change', callback );
+        			return this;
+        		}
+        	};
+        })(jQuery);
+        /**
+        // ||||||||||||||||||||||||||||||| \\
+        //	Drag and Drop code for Upload
+        // ||||||||||||||||||||||||||||||| \\
+        **/
+        var dragdrop = {
+        	init : function( elem ){
+        		elem.setAttribute('ondrop', 'dragdrop.drop(event)');
+        		elem.setAttribute('ondragover', 'dragdrop.drag(event)' );
+        	},
+        	drop : function(e){
+        		e.preventDefault();
+        		var file = e.dataTransfer.files[0];
+        		runUpload( file );
+        	},
+        	drag : function(e){
+        		e.preventDefault();
+        	}
+        };
+    
+        /**
+        // ||||||||||||||||||||||||||||||| \\
+        //	Code to capture a file (image) 
+        //  and upload it to the browser
+        // ||||||||||||||||||||||||||||||| \\
+        **/
+        function runUpload( file ) {
+        	// http://stackoverflow.com/questions/12570834/how-to-preview-image-get-file-size-image-height-and-width-before-upload
+        	if( file.type === 'image/png'  || 
+        			file.type === 'image/jpg'  || 
+        		  file.type === 'image/jpeg' ||
+        			file.type === 'image/gif'  ||
+        			file.type === 'image/bmp'  ){
+        		var reader = new FileReader(),
+        				image = new Image();
+        		reader.readAsDataURL( file );
+
+        		reader.onload = function( _file ){
+        			$('imgPrime').el.src = _file.target.result;
+        			$('img-avatar').el.src = _file.target.result;
+        			$('imgPrime').el.style.display = 'inline';
+        			$('avatarSrcName').el.value = $('imgPrime').el.src;
+        		};
+        		        		
+        	} // END test if file.type === image
+        }
+        
+        /**
+        // ||||||||||||||||||||||||||||||| \\
+        //	window.onload fun
+        // ||||||||||||||||||||||||||||||| \\
+        **/
+        window.onload = function(){
+        	if( window.FileReader ){
+        		// Connect the DIV surrounding the file upload to HTML5 drag and drop calls
+        		dragdrop.init( $('userActions').el );
+        		//	Bind the input[type="file"] to the function runUpload()
+        		$('fileUpload').onChange(function(){ runUpload( this.files[0] ); });
+        	}else{
+        		// Report error message if FileReader is unavilable
+        		var p   = document.createElement( 'p' ),
+        				msg = document.createTextNode( 'Sorry, your browser does not support FileReader.' );
+        		p.className = 'error';
+        		p.appendChild( msg );
+        		$('userActions').el.innerHTML = '';
+        		$('userActions').el.appendChild( p );
+        	}
+        };        
+
+    </script>    
+    
+    
+    
 <% include ../partials/footer %>
 

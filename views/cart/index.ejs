@@ -25,7 +25,7 @@
                                         <span class="listePanierItem"><%= article.item.nom %></span>
                                         <div class="green"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span><strong> En stock,</strong> expédition aujourd'hui</div>
                                         <span class="listePanierKdo"><p>Ceci sera un cadeau</p></span>
-                                        <p title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p>
+                                        <span class="listePanierSup"><a href="/delete-from-cart/<%= article.item._id %>">Supprimer</a></span>
                                     </td>
                                     <td><span class="listePanierPrix">EUR <%= Number(article.item.prix).toFixed(2) %></span></td>
                                  </tr>

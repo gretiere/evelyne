@@ -3,7 +3,7 @@
     
     <div class="row">
         <div class="row product flexbox">
-            <div class="col-md-6 product-grid">
+            <div class="col-md-6 col-xs-12 product-grid">
                 <a class=" js-img-viwer" href="<%= article.image %>" >
                     <div class="crop-to-square">
                         <div class="crop-to-square-positioner img-text-overlay">
@@ -121,32 +121,36 @@
                 <% }) %>
             </div>        
          </div>
-        <!-- AUTRES ITEMS -->
-        <div class="col-md-12 product-section">
-            <p class="product-title">Autres articles de <%=article.author.username%></p>
-        </div>
-        
-        <!-- Carousel
-        ================================================== -->
-        <% listArticles.forEach(function(article) { %>
-            <span style="visibility:hidden;"><a href='/articles/<%= article._id %>'><img class="im" width="0px" src=<%= article.image %>></a></span>
-        <% }); %>
-        <div id="myCarousel" class="carousel slide col-md-12 product-title">
-          <!-- Indicators -->
-          <ol class="carousel-indicators">
-          </ol>
-          <div class="carousel-inner">
-           
-          </div>
-          <!-- Controls -->
-          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="icon-prev"></span>
-          </a>
-          <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="icon-next"></span>
-          </a>  
-        </div>
-        <!-- /.carousel -->    
+         
+        <% if (article.author.username === "TEST") {%>
+            <!-- AUTRES ITEMS -->
+            <div class="col-md-12 product-section">
+                <p class="product-title">Autres articles de <%=article.author.username%></p>
+            </div>
+            
+            <!-- Carousel
+            ================================================== -->
+            <% listArticles.forEach(function(article) { %>
+                <span style="visibility:hidden;"><a href='/articles/<%= article._id %>'><img class="im" width="0px" src=<%= article.image %>></a></span>
+            <% }); %>
+            <div id="myCarousel" class="carousel slide col-md-12 product-title">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+              </ol>
+              <div class="carousel-inner">
+               
+              </div>
+              <!-- Controls -->
+              <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="icon-prev"></span>
+              </a>
+              <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="icon-next"></span>
+              </a>  
+            </div>
+            <!-- /.carousel -->            
+        <% }; %>
+
         
     </div>
 </div>    

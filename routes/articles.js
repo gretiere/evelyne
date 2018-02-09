@@ -3,6 +3,9 @@ var router  = express.Router();
 var article = require("../models/article");
 var user = require("../models/user");
 var middleware = require("../middleware");
+var async = require("async");
+var nodemailer = require("nodemailer");
+var crypto = require("crypto");
 var multer = require("multer");
 var fs = require("fs");
 
@@ -107,58 +110,17 @@ router.get("/", function(req, res){
 router.get("/new", middleware.isLoggedIn, function(req, res){
   console.log("currentUser article/new" + req.user);
   req.session.save(function(){
-      res.render("articles/new"); 
+      res.render("articles/new", {user: req.user}); 
   });
    
 });
 
-// //CREATE - add new article to DB
-// router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res) {
-//     // get data from form and add to articles array
-//     console.log("currentUser article/create" + req.user);
-//     console.log("currentUser middleware.isLoggedIn" + req.isAuthenticated);
-//     // eval(require("locus"));
-//     cloudinary.uploader.upload(req.file.path, function(result) {
-//           // add cloudinary url for the image to the campground object under image property
-//           req.body.article.image = result.secure_url;
-//           // add author to campground
-//           req.body.article.author = {
-//             id: req.user._id,
-//             username: req.user.username
-//           };
-//           article.create(req.body.article, function(err, article) {
-//             if (err) {
-//               req.flash('error', err.message);
-//               return res.redirect('back');
-//             }
-//             console.log("currentUser article/create" + req.user);
-//             console.log("currentUser middleware.isLoggedIn" + req.isAuthenticated);
-//             req.session.save(function() {
-//                 res.redirect('/articles/' + article.id);
-//             });
-                
-            
-//           });
-//     },  
-//         {
-//             public_id: article.id, 
-//             crop: 'limit',
-//             width: 640,
-//             height: 640,
-//             eager: [
-//               { width: 200, height: 200, crop: 'thumb', gravity: 'face',
-//                 radius: 20, effect: 'sepia' },
-//               { width: 100, height: 150, crop: 'fit', format: 'png' }
-//             ],                                     
-//             tags: ['special', 'for_homepage']
-//           }      
-//     );
-// });
 
 
- router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res) {
+ router.post("/", middleware.isLoggedIn, upload.single('avatarLoad'), function(req, res) {
     // get data from form and add to articles array
     if (req.body.avatarSrcName != "") {
+        eval(require("locus"))
         var block = req.body.avatarSrcName.split(";");
         let base64Image = req.body.avatarSrcName.split(';base64,').pop();
         var tempFile = "./public/data/" + req.params.id + ".png";
@@ -231,31 +193,65 @@ router.get("/:id", function(req, res){
 });
 
 // EDIT article ROUTE
-router.get("/:id/edit", middleware.checkarticleOwnership, upload.single('photo'), function(req, res){
+router.get("/:id/edit", middleware.checkarticleOwnership, upload.single('image'), function(req, res){
     article.findById(req.params.id, function(err, foundarticle){
            console.log("currentUser article/id/edit" + req.user);
         req.session.save(function(){
-            res.render("articles/edit", {article: foundarticle});
+            res.render("articles/edit", {article: foundarticle, user:req.user});
         });
     });
 });
 
+
 // UPDATE article ROUTE
-router.put("/:id",middleware.checkarticleOwnership, function(req, res){
-    // find and update the correct article
-    article.findByIdAndUpdate(req.params.id, req.body.article, {new: true}, function(err, updatedarticle){
-       if(err){
-           req.session.save(function(){
-                res.redirect("/articles");
-           });
-       } else {
-           //redirect somewhere(show page)
-           console.log("currentUser article/put" + req.user);
-           req.session.save(function(){
-               res.redirect("/articles/" + req.params.id);
-           });
-       }
-    });
+router.put("/:id", upload.single('avatarLoad'), function(req, res){
+   
+    if (req.body.avatarSrcName != "") {
+        var block = req.body.avatarSrcName.split(";");
+        let base64Image = req.body.avatarSrcName.split(';base64,').pop();
+        var tempFile = "./public/data/" + req.params.id + ".png";
+        fs.writeFile(tempFile, base64Image, {encoding: 'base64'}, function(err) {
+            cloudinary.uploader.upload(tempFile,  function(result) {        
+              req.body.article.image = result.secure_url;
+              req.body.article.author = {
+                id: req.user._id,
+                username: req.user.username
+              };
+
+             // find and update the correct article
+             article.findByIdAndUpdate(req.params.id, req.body.article, {new: true}, function(err, updatedarticle){
+              if(err){
+                 req.session.save(function(){
+                      res.redirect("/articles");
+                  });
+                } else {
+                 //redirect somewhere(show page)
+                 console.log("currentUser article/put" + req.user);
+                 req.session.save(function(){
+                     res.redirect("/articles/" + req.params.id);
+                 });
+                }
+              });
+          },  
+          {
+              public_id: article.id, 
+              crop: 'limit',
+              width: 640,
+              height: 640,
+              eager: [
+                { width: 200, height: 200, crop: 'thumb', gravity: 'face',
+                  radius: 20, effect: 'sepia' },
+                { width: 100, height: 150, crop: 'fit', format: 'png' }
+              ],                                     
+              tags: ['special', 'for_homepage']
+          }      
+        );
+    });     
+  } else  {
+      console.log("Case else");
+  }
+
+
 });
 
 // DESTROY article ROUTE

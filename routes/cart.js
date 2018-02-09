@@ -17,6 +17,7 @@ router.get("/", function(req, res){
     
 });
 
+
 router.get("/checkout", function(req, res){
     if (req.session.cart) {
         var cart = new Cart(req.session.cart);

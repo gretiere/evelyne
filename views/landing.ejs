@@ -1,9 +1,18 @@
 <% include partials/header %>
+       
+
 
     <div class="promo-header " id="heading-banner">
+            <div class="main-title" id ="evline">
+                <h1>evline</h1>
+                    <h2>envies de laine</h2>
 
-        <div class="my-container container pt25-sm-down">
-            
+                <img width="100%" src="https://images.unsplash.com/photo-1498008018457-e4c2937641b2?ixlib=rb-0.3.5&s=c5441d8c0c852dbfedbbc870729006f9&auto=format&fit=crop&w=1350&q=80">
+
+            </div>  
+       
+            <div class="my-container container pt25-sm-down">
+               
             <% articles.forEach(function(article) { %>
                 <section class="section1" id ="<%= article.nom %>">
                     <h1 style="color:<%= article.couleurTheme %>;"><%= article.nom %></h1>
