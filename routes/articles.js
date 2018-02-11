@@ -120,7 +120,6 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
  router.post("/", middleware.isLoggedIn, upload.single('avatarLoad'), function(req, res) {
     // get data from form and add to articles array
     if (req.body.avatarSrcName != "") {
-        eval(require("locus"))
         var block = req.body.avatarSrcName.split(";");
         let base64Image = req.body.avatarSrcName.split(';base64,').pop();
         var tempFile = "./public/data/" + req.params.id + ".png";
@@ -248,7 +247,21 @@ router.put("/:id", upload.single('avatarLoad'), function(req, res){
         );
     });     
   } else  {
-      console.log("Case else");
+         console.log("Pas de changement photo");
+         // find and update the correct article
+         article.findByIdAndUpdate(req.params.id, req.body.article, {new: true}, function(err, updatedarticle){
+          if(err){
+             req.session.save(function(){
+                  res.redirect("/articles");
+              });
+            } else {
+             //redirect somewhere(show page)
+             console.log("currentUser article/put" + req.user);
+             req.session.save(function(){
+                 res.redirect("/articles/" + req.params.id);
+             });
+            }
+          });      
   }
 
 

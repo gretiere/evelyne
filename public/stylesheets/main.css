@@ -27,7 +27,7 @@ h1 { font-size: 1.5em; margin: 10px; }
     text-align: center;
     font-family: "Helvetica Neue",Helvetica,"pragmatica-web",Arial,sans-serif;  
     letter-spacing: -0.04em;    
-    font-size: calc(48px + (96-48) * ((100vw - 300px) / (1600 - 300)));
+    font-size: calc(36px + (72-36) * ((100vw - 300px) / (1600 - 300)));
     font-weight: 700;
 }
 
@@ -44,6 +44,12 @@ h1 { font-size: 1.5em; margin: 10px; }
     font-weight: 300;   
     line-height:calc(280px + (400 - 280) * ((100vw - 300px) / (1600 - 300)));
 
+}
+.main-title p {
+    color:#000;
+    padding: 20px;
+    margin: 40px;
+    text-align: left;
 }
 /****** Style Star Rating Widget *****/
 
@@ -625,7 +631,7 @@ transform: translateX(-50%);
 }
 
 .navbar-brand img {
-    width: 50px;
+    width: 70px;
     display: inline-block;
 }
 .container-fluid {
@@ -647,7 +653,7 @@ transform: translateX(-50%);
 
 .btn-add-comment {
     color: #fff;
-    background-color: #388E3C;
+    background-color: #9575cd;
     text-decoration: none;
     border-color: transparent;
 }

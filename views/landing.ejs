@@ -4,21 +4,32 @@
 
     <div class="promo-header " id="heading-banner">
             <div class="main-title" id ="evline">
-                <h1>evline</h1>
-                    <h2>envies de laine</h2>
+                <h1>lorem ipsum</h1>
+                    <h2>consectetur adipisicing elit</h2>
 
                 <img width="100%" src="https://images.unsplash.com/photo-1498008018457-e4c2937641b2?ixlib=rb-0.3.5&s=c5441d8c0c852dbfedbbc870729006f9&auto=format&fit=crop&w=1350&q=80">
-
+                <p>
+Quanta autem vis amicitiae sit, ex hoc intellegi maxime potest, quod ex infinita societate generis humani, quam conciliavit ipsa natura, ita contracta res est et adducta in angustum ut omnis caritas aut inter duos aut inter paucos iungeretur.
+</p>
+<p>
+Et licet quocumque oculos flexeris feminas adfatim multas spectare cirratas, quibus, si nupsissent, per aetatem ter iam nixus poterat suppetere liberorum, ad usque taedium pedibus pavimenta tergentes iactari volucriter gyris, dum exprimunt innumera simulacra, quae finxere fabulae theatrales.
+</p>
+<p>
+Et eodem impetu Domitianum praecipitem per scalas itidem funibus constrinxerunt, eosque coniunctos per ampla spatia civitatis acri raptavere discursu. iamque artuum et membrorum divulsa conpage superscandentes corpora mortuorum ad ultimam truncata deformitatem velut exsaturati mox abiecerunt in flumen.                    
+                </p>
+                
             </div>  
-       
+           <img style="display: block; margin: 0 auto;" src="https://res.cloudinary.com/dhc7ovnwk/image/upload/t_media_lib_thumb/v1518361921/cold-logo_yykclm.png">
             <div class="my-container container pt25-sm-down">
                
             <% articles.forEach(function(article) { %>
                 <section class="section1" id ="<%= article.nom %>">
                     <h1 style="color:<%= article.couleurTheme %>;"><%= article.nom %></h1>
+                    <img style="display: block; margin: 0 auto; width:30px;" src="https://res.cloudinary.com/dhc7ovnwk/image/upload/t_media_lib_thumb/v1518362390/miscellaneous_wf74gm.png">                    
                     <!-- <div class="star" style="color:#37474f;"><i class="fa fa-star" aria-hidden="true"></i></div> -->
                     <h2 style="color:#546e7a;"><%= article.nomSecondaire %></h2>   
-                    <div class="star" style="color:#37474f;"><i class="fa fa-star" aria-hidden="true"></i></div>                     
+
+                    <!-- <div class="star" style="color:#37474f;"><i class="fa fa-star" aria-hidden="true"></i></div>                     -->
                     <p><%= article.description %></p>
                     <div class="wrapper">
                         <a href="/articles/<%= article.id %>"><img class="" src='<%= article.image %>'/></a>

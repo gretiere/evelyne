@@ -22,7 +22,7 @@
                 </div>               
                  <div class="col-md-12">
                     <h4 class="product-item"><span class="product-price"><%= Number(article.prix).toFixed(2) %> &euro;</span></h4>
-                    <h6>plus frais de livraison</h6>
+                    <h6>plus frais de livraison si applicable</h6>
                 </div>  
 
                 <% if((currentUser && article.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)){ %>
@@ -47,6 +47,7 @@
                 </div>  
 
                 <div class="col-md-12">
+                    <h4 class="product-item" id="labelMeanRating">Moyenne des avis</h4>
                     <fieldset class="rating">
                         <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
                         <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
@@ -60,13 +61,10 @@
                         <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
                     </fieldset>
                 </div>
-
-
-
-
-            
-
-                 <div class="col-md-12 ">
+                <div class="col-md-12 ">                
+                <hr>
+                </div>
+                <div class="col-md-12 ">
                     <p class="product-item"><strong>Description du produit :</strong></p>
                     <p class="product-item">Id Produit : <%= article._id %></p>
                     <p class="product-item">
@@ -78,14 +76,29 @@
                     <p class="product-item">
                         <%= article.descriptionTechnique %>
                     </p>
+                    <p class="product-item">Fait main</p>
+                    <p class="product-item">Technique : Crochet</p>
+                    <p class="product-item">Origine: Bretagne <img style="width:30px;" src="https://res.cloudinary.com/dhc7ovnwk/image/upload/t_media_lib_thumb/v1518362933/Gwenn_ha_du_xl9ghw.png"></p>
                 </div>        
                 <div class="col-md-12 ">
                     <p class="product-item"><strong>Livraison et retours :</strong></p>
                     <p class="product-item">Recevez ceci rapidement ! Prêt à expédier sous 3 jours ouvrés.</p>
                     <p class="product-item">Depuis le pays : France.</p>
                     <p class="product-item">4,95 € de livraison vers France.</p>
+                    <p class="product-item">Je n'accepte pas les retours, les échanges ou les annulations. Mais n'hésitez pas à me contacter en cas de problème avec votre commande.</p>
                 </div>    
-                 
+                <div class="col-md-12 ">
+                    <p class="product-item"><strong>Coordonnées du vendeur :</strong></p>
+                    <p class="product-item">Evelyne Retière</p>
+                    <p class="product-item">10 rue Lamoricière</p>
+                    <p class="product-item">44100 Nantes</p>
+                    <p class="product-item">France</p>
+                </div>     
+                <div class="col-md-12 ">
+                    <p class="product-item"><strong>Paiements :</strong></p>
+                    <p class="product-item">Tous les paiements sont effectués de manière sécurisée</p>
+                    <img width="200px" src="http://www.serie-noire.com/wp/wp-content/uploads/2015/09/logo-paiements.png">
+                </div>                  
             </div> 
 
         </div>
@@ -98,27 +111,42 @@
 
             <div class="well">
                 <div class="text-right">
-                    <a class="btn btn-success btn-add-comment" href="/articles/<%= article._id %>/comments/new">Add New Comment</a>
+                    <button class="btn btn-add-cart"><a href="/articles/<%= article._id %>/comments/new">Ajouter un commentaire</a></button>
                 </div>
                 <hr>
-                <% article.comments.forEach(function(comment){ %>
+                <% for (var i = 0, len = article.comments.length; i < len; i++) { %>
                     <div class="row">
                         <div class="col-md-12 product-comment" >
-                            <strong><a href="/users/<%= comment.author.id %>"><%= comment.author.username %></a></strong>
+                            Commentaire de : <strong><a href="/users/<%= article.comments[i].author.id %>"><%= article.comments[i].author.username %></a></strong>
                             <span class="pull-right">10 days ago</span>
-                            <p>
-                                <%= comment.text %> 
+                            <p>&nbsp;</p>
+                            <p class="product-item">
+                                <%=  article.comments[i].text %> 
                             </p>
-                        <% if((currentUser && comment.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)){ %>
+                            <fieldset class="rating">
+                                <input type="radio" id="cstar5" name="crating[<%=i%>]" value="5" /><label class = "full" for="cstar5" title="Awesome - 5 stars" disabled></label>
+                                <input type="radio" id="cstar4half" name="crating[<%=i%>]" value="4 and a half" /><label class="half" for="cstar4half" title="Pretty good - 4.5 stars"></label>
+                                <input type="radio" id="cstar4" name="crating[<%=i%>]" value="4" /><label class = "full" for="cstar4" title="Pretty good - 4 stars"></label>
+                                <input type="radio" id="cstar3half" name="crating[<%=i%>]" value="3 and a half" /><label class="half" for="cstar3half" title="Meh - 3.5 stars"></label>
+                                <input type="radio" id="cstar3" name="crating[<%=i%>]" value="3" /><label class = "full" for="cstar3" title="Meh - 3 stars"></label>
+                                <input type="radio" id="cstar2half" name="crating[<%=i%>]" value="2 and a half" /><label class="half" for="cstar2half" title="Kinda bad - 2.5 stars"></label>
+                                <input type="radio" id="cstar2" name="crating[<%=i%>]" value="2" /><label class = "full" for="cstar2" title="Kinda bad - 2 stars"></label>
+                                <input type="radio" id="cstar1half" name="crating[<%=i%>]" value="1 and a half" /><label class="half" for="cstar1half" title="Meh - 1.5 stars"></label>
+                                <input type="radio" id="cstar1" name="crating[<%=i%>]" value="1" /><label class = "full" for="cstar1" title="Sucks big time - 1 star"></label>
+                                <input type="radio" id="cstarhalf" name="crating[<%=i%>]" value="half" /><label class="half" for="cstarhalf" title="Sucks big time - 0.5 stars"></label>
+                            </fieldset>  
+                            <p>&nbsp;</p>
+                        <% if((currentUser && article.comments[i].author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)){ %>
                             <a class="btn btn-xs btn-warning" 
-                               href="/articles/<%=article._id %>/comments/<%=comment._id %>/edit">Edit</a>
-                            <form id="delete-form" action="/articles/<%=article._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                               href="/articles/<%=article._id %>/comments/<%=article.comments[i]._id %>/edit">Edit</a>
+                            <form id="delete-form" action="/articles/<%=article._id %>/comments/<%=article.comments[i]._id %>?_method=DELETE" method="POST">
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                             </form>
+                            <hr>
                         <% } %>
                         </div>
                     </div>
-                <% }) %>
+                <% } %>
             </div>        
          </div>
          
@@ -212,5 +240,33 @@ $(document).ready(function(){
     });
 </script>
 
+<script>
+    /*
+     Gestion des étoiles des notes (ratings)
+    */
+    $(document).ready(function() {
+        var offset = 0;
+        var totalRating = 0;
+        var nbRating = 0;
+        <% for (var i = 0, len = article.comments.length; i < len; i++) { %>
+            var rating = <%=article.comments[i].rating %>
+            offset = (10 - ( rating *2) % 10) %10;
+            if (rating) {
+                totalRating += rating;
+                nbRating++;
+            }
+            $( 'input[name="crating[<%=i%>]"]:radio:eq('+offset+')' ).prop("checked", true);
+        <% } %>        
+        // moyenne
+        offset = parseInt((10 - ( (totalRating / nbRating) *2) % 10) %10);
+        $( 'input[name="rating"]:radio:eq('+ offset +')' ).trigger("click");
+        // $( '.rating > input:checked  ~ label').css("color", "#FFD700")
+        // on rend insensible les boutons
+        $(".rating > input").attr('disabled', true);
+        // on empeche toute interaction
+        $(".rating").css('pointer-events','none');
+        $('#labelMeanRating').text("Moyenne des avis (" + nbRating + ")");
+    });    
+</script>
 
 <% include ../partials/footer %>

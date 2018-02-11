@@ -33,6 +33,8 @@ router.post("/",middleware.isLoggedIn,function(req, res){
                //add username and id to comment
                comment.author.id = req.user._id;
                comment.author.username = req.user.username;
+               comment.rating = req.body.comment.rating;
+               article.meanRating = comment.rating;
                //save comment
                comment.save();
                article.comments.push(comment);

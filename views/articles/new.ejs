@@ -3,7 +3,7 @@
         <h1 style="text-align: center">Ajouter un article</h1>
         <div class="container">
         <div class="col-md-12">
-            <form action="/articles" method="POST" enctype="multipart/form-data">
+            <form id="addArticle" action="/articles" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <input class="form-control" type="text" name="article[nom]" placeholder="nom" required>
                 </div>
@@ -60,8 +60,15 @@
 
     <script>
         'use strict';
-	     $('#heading-banner').css('display', 'none');
-	   
+	    $('#heading-banner').css('display', 'none');
+
+        $('form').submit(function(){
+            console.log("S1");
+            $(this).find('input:text').each(function(){
+                var inputValue = $(this).val();
+                $.trim(inputValue);
+            });
+        });
         /**
         // ||||||||||||||||||||||||||||||| \\
         //	Global Object $: Generic controls

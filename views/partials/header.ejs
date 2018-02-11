@@ -41,13 +41,22 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-    <a class="navbar-brand" href="/"><img src="http://res.cloudinary.com/dhc7ovnwk/image/upload/v1517863319/laine-rover_nj0bfk.jpg" ></a>
+                <a class="navbar-brand" href="/"><img src="https://res.cloudinary.com/dhc7ovnwk/image/upload/t_media_lib_thumb/v1518360833/logo-mouton_gywdvj.png" ></a>
                 <!-- http://www.creationlogo.org/wp-content/uploads/2017/08/Logo_TV_2015.png -->
             </div>
                             
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="<%= typeof page !== 'undefined' && page === 'articles' ? 'active' : '' %>"><a href="/articles">Articles</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Articles</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/articles">Tous</a></li> 
+                            <li role="separator" class="divider"></li>       
+                            <% session.articles.forEach(function(article) { %>
+                                <li><a href="/#<%= article.nom %>"><%= article.nom %></a></li>
+                            <% });%>                    
+                        </ul>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav">
                     &nbsp;
@@ -94,12 +103,6 @@
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><span class="caret"></span></a>
                           <ul class="dropdown-menu">
-                   
-                            <% session.articles.forEach(function(article) { %>
-                            <li><a href="/#<%= article.nom %>"><%= article.nom %></a></li>
-                            <% });%>
-                            
-                            <li role="separator" class="divider"></li> 
                             <li><a href="#">FAQ</a></li>
                             <li><a href="#">Contact us</a></li>
                             <li><a href="#">About us</a></li>
@@ -117,11 +120,6 @@
                                 <li role="separator" class="divider"></li>
                                 <li><a href="/users/<%= currentUser.id %>">Manage Your Boutique</a></li>
                             <% }; %>
-                            <li role="separator" class="divider"></li>
-                            <!-- itérer sur les produits de la vitrine  -->
-                            <% session.articles.forEach(function(article) { %>
-                            <li><a href="/#<%= article.nom %>"><%= article.nom %></a></li>
-                            <% });%>
                             <li role="separator" class="divider"></li>                                     
                             <li><a href="#">FAQ</a></li>
                             <li><a href="#">Contact us</a></li>

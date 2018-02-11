@@ -18,6 +18,7 @@ var articleSchema = new mongoose.Schema({
    cost: Number,
    couleurTheme: String,
    afficheVitrine: Boolean,
+   meanRating : Number,
    author: {
       id: {
          type: mongoose.Schema.Types.ObjectId,
