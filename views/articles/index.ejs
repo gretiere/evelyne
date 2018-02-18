@@ -18,8 +18,12 @@
          </p>        
         <% };%>
         
-        <h1 style="text-align:center;">Tous les articles</h1>
-        
+        <div class="collection-header">
+            <div class="horizontal_dashed_top_line"></div>            
+            <h1>Collection Hiver</h1>
+            <div class="horizontal_dashed_bottom_line"></div>            
+        </div>
+
         <div class="row text-center" style="display:flex; flex-wrap: wrap;">
 
             <% articles.forEach(function(article){ %>
@@ -39,7 +43,7 @@
                                 <%= Number(article.prix).toFixed(2) %> €
                             </div>                            
                             <button class="btn btn-voir-plus float-right">
-                                <a href="/articles/<%= article._id %>">Informations produit</a>
+                                <a href="/articles/<%= article._id %>">Voir plus</a>
                             </button>    
 
                     </div>
@@ -60,7 +64,7 @@
          // all content number 
         var totalContent = $("section").length;
           // post number in a page
-        var onePageContent = 4;
+        var onePageContent = 8;
           
           //Page number and Math.round for balancing page
           $("section:gt(" + (onePageContent - 1) + ")").hide();

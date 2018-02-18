@@ -43,14 +43,41 @@ h1 { font-size: 1.5em; margin: 10px; }
     font-size: calc(32px + (48 - 32) * ((100vw - 300px) / (1600 - 300)));
     font-weight: 300;   
     line-height:calc(280px + (400 - 280) * ((100vw - 300px) / (1600 - 300)));
-
 }
+
+.main-title h2 > p {
+    position:absolute;    
+    color:#fff;
+    font-family: "Helvetica Neue",Helvetica,"pragmatica-web",Arial,sans-serif;  
+    letter-spacing: -0.04em;      
+    font-size: calc(14px + (24 - 14) * ((100vw - 300px) / (1600 - 300)));    
+    line-height:calc(14px + (24 - 14) * ((100vw - 300px) / (1600 - 300)));
+    
+    padding: 20px;
+    margin: 20px;
+    width: 100%;
+    margin-top: -130px;
+    padding-left: 20%;
+    padding-right: 20%;
+    text-align: center !important;    
+}
+
+.main-title h2 > img {
+    display: block !important;
+    margin: 0 auto;
+    margin-top: -100px !important;
+    text-align: center !important;      
+    width: 30%;
+}
+
+
 .main-title p {
     color:#000;
     padding: 20px;
     margin: 40px;
     text-align: left;
 }
+
 /****** Style Star Rating Widget *****/
 
 .rating { 
@@ -116,12 +143,60 @@ body {
 }
 
 p {
-        font-family: "PT Serif",Georgia,Times,"Times New Roman",serif;
-            font-size: 26px;
+    font-family: "PT Serif",Georgia,Times,"Times New Roman",serif;
+    font-size: 26px;
     line-height: 39px;
     font-weight: 400;
     margin-bottom: 10px;
 }
+
+.propsize {
+    font-size: calc(18px + (26 - 18) * ((100vw - 300px) / (1600 - 300)));    
+    line-height:calc(20px + (39 - 20) * ((100vw - 300px) / (1600 - 300)));    
+}
+
+.collection-header{
+    background-color: #fff;
+}
+
+.collection-header h1 {
+    line-height: 110px;
+    vertical-align: middle;
+    text-align:center;
+    color:#9575cd;
+    background-color: #fff;
+    font-size: calc(18px + (40 - 18) * ((100vw - 300px) / (1600 - 300)));    
+    line-height:calc(20px + (39 - 20) * ((100vw - 300px) / (1600 - 300)));      
+}
+
+.horizontal_dashed_top_line {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 5px;
+    border-bottom: 1px dashed #9575cd;
+    width: 100%;
+}
+
+
+.horizontal_dashed_bottom_line {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    border-top: 1px dashed #9575cd;
+    width: 100%;
+}
+
+.box-container {
+  background: #424244;
+  display: table;
+  margin-bottom: 10px;
+}
+.box {
+  height: 40px;
+  width: 40px;
+  display: table-cell;
+}
+
 #login-box {
   position: relative;
   margin: 5% auto;
@@ -753,7 +828,7 @@ transform: translateX(-50%);
 .product-title {
     font-family: "Helvetica Neue",Helvetica,"pragmatica-web",Arial,sans-serif;  
     letter-spacing: -0.04em;
-    font-size: 36px;
+    font-size: 48px;
     font-weight: 700;
     color: #000;
     text-align: left;
@@ -761,8 +836,8 @@ transform: translateX(-50%);
 .product-subtitle {
     font-family: "Helvetica Neue",Helvetica,"pragmatica-web",Arial,sans-serif;  
     letter-spacing: -0.04em;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 24px;
+    font-weight: 300;
     color: #000;
     text-align: left;
 }
@@ -850,7 +925,6 @@ transform: translateX(-50%);
 .crop-to-square {
     overflow: hidden;
     position: relative;
-
     /* change these 2 values to adjust the size relative to its parent */
     width: 100%;
     padding-bottom: 100%;
